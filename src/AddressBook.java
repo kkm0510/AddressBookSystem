@@ -7,6 +7,7 @@ public class AddressBook {
     static Scanner sc = new Scanner(System.in);
 
     public static void editContact() {
+        sc.nextLine();
         System.out.print("Enter first name : ");
         String firstName = sc.nextLine();
         System.out.print("Enter last name : ");
@@ -46,13 +47,16 @@ public class AddressBook {
                         c.phoneNumber = sc.nextLong();
                     }
                 }
+                System.out.println("Contact edited successfully");
                 sc.nextLine();
+                return;
             }
         }
         System.out.println("Contact doesn't exist in address book");
     }
 
     public static void deleteContact() {
+        sc.nextLine();
         System.out.print("Enter first name : ");
         String firstName = sc.nextLine();
         System.out.print("Enter last name : ");
@@ -68,15 +72,18 @@ public class AddressBook {
 
 
     public static void main(String[] args) {
-        System.out.print("Enter choice : (1)Add contact (2)edit contact (3)delete contact -> ");
-        int choice= sc.nextInt();
-        switch(choice){
-            case 1 -> {
-                Contact person=new Contact();
-                book.add(person);
+        while(true){
+            System.out.print("Enter choice : (1)Add contact (2)edit contact (3)delete contact (0)Exit -> ");
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1 -> {
+                    Contact person = new Contact();
+                    book.add(person);
+                }
+                case 2 -> editContact();
+                case 3 -> deleteContact();
             }
-            case 2 -> editContact();
-            case 3 -> deleteContact();
+            if(choice==0) break;
         }
     }
 }

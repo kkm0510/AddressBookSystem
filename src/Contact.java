@@ -13,7 +13,7 @@ public class Contact {
 
     public Contact(){
         Scanner sc=new Scanner(System.in);
-        System.out.println("New Entry : ");
+        System.out.println("~~~~New Entry~~~~ ");
         System.out.print("Enter first name : ");
         firstName=sc.nextLine();
         System.out.print("Enter last name : ");
@@ -32,5 +32,4 @@ public class Contact {
         email=sc.nextLine();
         sc.nextLine();
     }
-
 }
