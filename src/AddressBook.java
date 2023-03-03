@@ -70,10 +70,22 @@ public class AddressBook {
         System.out.println("Contact deleted");
     }
 
+    public static void printAddressBook() {
+        for (Contact c : book) {
+            System.out.println();
+            System.out.println("Name : " + c.firstName + " " + c.lastName);
+            System.out.println("Address : " + c.address);
+            System.out.println("City : " + c.city);
+            System.out.println("State : " + c.state);
+            System.out.println("Pin : " + c.pin);
+            System.out.println("Phone No : " + c.phoneNumber);
+            System.out.println("Email : " + c.email);
+        }
+    }
 
     public static void main(String[] args) {
-        while(true){
-            System.out.print("Enter choice : (1)Add contact (2)edit contact (3)delete contact (0)Exit -> ");
+        while (true) {
+            System.out.print("Enter choice : (1)Add contact (2)edit contact (3)delete contact (4)Print Address Book (0)Exit -> ");
             int choice = sc.nextInt();
             switch (choice) {
                 case 1 -> {
@@ -82,8 +94,9 @@ public class AddressBook {
                 }
                 case 2 -> editContact();
                 case 3 -> deleteContact();
+                case 4 -> printAddressBook();
             }
-            if(choice==0) break;
+            if (choice == 0) break;
         }
     }
 }

@@ -28,8 +28,9 @@ public class Contact {
         pin=sc.nextInt();
         System.out.print("Enter phone number : ");
         phoneNumber=sc.nextLong();
+        sc.nextLine();
         System.out.print("Enter email : ");
         email=sc.nextLine();
-        sc.nextLine();
+        System.out.println();
     }
 }
