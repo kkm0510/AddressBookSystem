@@ -5,7 +5,7 @@ public class AddressBook {
 
     static final ArrayList<Contact> book=new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static Contact createContact(){
         Scanner sc=new Scanner(System.in);
         Contact person=new Contact();
         System.out.println("Enter first name : ");
@@ -33,6 +33,13 @@ public class AddressBook {
         person.pin=pin;
         person.phoneNumber=phoneNumber;
         person.email=email;
-        book.add(person);
+        return person;
+    }
+
+    public static void main(String[] args) {
+        Contact person1=createContact();
+        Contact person2=createContact();
+        book.add(person1);
+        book.add(person2);
     }
 }
