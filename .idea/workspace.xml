@@ -56,11 +56,19 @@
       <option name="project" value="LOCAL" />
       <updated>1677826146700</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="ADDED : code to add a new contact in address book">
+      <created>1677828619319</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1677828619319</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ADDED : welcome message" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADDED : welcome message" />
+    <MESSAGE value="ADDED : code to add a new contact in address book" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADDED : code to add a new contact in address book" />
   </component>
 </project>
