@@ -1,92 +1,105 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class AddressBook {
 
-    static final ArrayList<Contact> book = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
+    static final Map<String, AddressBook> DICTIONARY = new HashMap<>();
+    ArrayList<Contact> book;
 
-    public static void editContact() {
-        final int FIRST_NAME=1;
-        final int LAST_NAME=2;
-        final int ADDRESS=3;
-        final int CITY=4;
-        final int STATE=5;
-        final int PIN=6;
-        final int PHONE_NUMBER=7;
-        final int EMAIL=8;
+    public AddressBook() {
+        book = new ArrayList<>();
+    }
 
-        sc.nextLine();
+    public void editContact() {
+        final int FIRST_NAME = 1;
+        final int LAST_NAME = 2;
+        final int ADDRESS = 3;
+        final int CITY = 4;
+        final int STATE = 5;
+        final int PIN = 6;
+        final int PHONE_NUMBER = 7;
+        final int EMAIL = 8;
+        final int EVERYTHING=9;
+
         System.out.print("Enter first name : ");
-        String firstName = sc.nextLine();
+        String firstName = sc.next();
         System.out.print("Enter last name : ");
-        String lastName = sc.nextLine();
+        String lastName = sc.next();
 
-        for (Contact c : book) {
-            if (c.firstName.equals(firstName) && c.lastName.equals(lastName)) {
-                System.out.print("What do you want to edit? (1)first name (2)last name (3)address (4)city (5)state (6)pin (7)phone number (8)email -> ");
+        for (int i=0; i< book.size(); i++) {
+            if (book.get(i).firstName.equals(firstName) && book.get(i).lastName.equals(lastName)) {
+                sc.nextLine();
+                System.out.print("What do you want to edit? (1)first name (2)last name (3)address (4)city (5)state (6)pin (7)phone number (8)email (9)Everything -> ");
                 int choice = sc.nextInt();
                 switch (choice) {
                     case FIRST_NAME -> {
                         System.out.print("Enter new first name : ");
-                        c.firstName = sc.nextLine();
+                        book.get(i).firstName = sc.next();
                     }
                     case LAST_NAME -> {
                         System.out.print("Enter new last name : ");
-                        c.lastName = sc.nextLine();
+                        book.get(i).lastName = sc.next();
                     }
                     case ADDRESS -> {
                         System.out.print("Enter new address : ");
-                        c.address = sc.nextLine();
+                        book.get(i).address = sc.nextLine();
                     }
-                    case  CITY -> {
+                    case CITY -> {
                         System.out.print("Enter new city : ");
-                        c.city = sc.nextLine();
+                        book.get(i).city = sc.next();
                     }
                     case STATE -> {
                         System.out.print("Enter new state : ");
-                        c.state = sc.nextLine();
+                        book.get(i).state = sc.nextLine();
                     }
                     case PIN -> {
                         System.out.print("Enter new pin : ");
-                        c.pin = sc.nextInt();
+                        book.get(i).pin = sc.nextInt();
                     }
                     case PHONE_NUMBER -> {
                         System.out.print("Enter new phone number : ");
-                        c.phoneNumber = sc.nextLong();
+                        book.get(i).phoneNumber = sc.nextLong();
                     }
                     case EMAIL -> {
                         System.out.print("Enter new EMAIL : ");
-                        c.email = sc.nextLine();
+                        book.get(i).email = sc.nextLine();
                     }
-
+                    case EVERYTHING -> book.set(i, new Contact());
+                    default -> System.out.println("Wrong input");
                 }
                 System.out.println("Contact edited successfully");
-                sc.nextLine();
+                System.out.println();
                 return;
             }
         }
         System.out.println("Contact doesn't exist in address book");
+        System.out.println();
     }
 
-    public static void deleteContact() {
-        sc.nextLine();
+    public void deleteContact() {
         System.out.print("Enter first name : ");
-        String firstName = sc.nextLine();
+        String firstName = sc.next();
         System.out.print("Enter last name : ");
-        String lastName = sc.nextLine();
+        String lastName = sc.next();
 
         for (Contact c : book) {
             if (c.firstName.equals(firstName) && c.lastName.equals(lastName)) {
                 book.remove(c);
+                System.out.println("Contact deleted");
+                System.out.println();
+                return;
             }
         }
-        System.out.println("Contact deleted");
+        System.out.println("Contact doesn't exist");
+        System.out.println();
     }
 
-    public static void printAddressBook() {
+    public void printAddressBook() {
         for (Contact c : book) {
-            System.out.println();
+            System.out.println("~~~~~~");
             System.out.println("Name : " + c.firstName + " " + c.lastName);
             System.out.println("Address : " + c.address);
             System.out.println("City : " + c.city);
@@ -94,16 +107,18 @@ public class AddressBook {
             System.out.println("Pin : " + c.pin);
             System.out.println("Phone No : " + c.phoneNumber);
             System.out.println("Email : " + c.email);
+            System.out.println("~~~~~~");
         }
     }
 
-    public static void main(String[] args) {
-        final int ADD_CONTACT=1;
-        final int EDIT_CONTACT=2;
-        final int DELETE_CONTACT=3;
-        final int PRINT_BOOK=4;
+    public void operateBook(String bookName) {
+        final int ADD_CONTACT = 1;
+        final int EDIT_CONTACT = 2;
+        final int DELETE_CONTACT = 3;
+        final int PRINT_BOOK = 4;
+        final int BACK_TO_MAIN_MENU = 0;
         while (true) {
-            System.out.print("Enter choice : (1)Add contact (2)edit contact (3)delete contact (4)Print Address Book (0)Exit -> ");
+            System.out.print(bookName + " -> Enter choice : (1)Add contact (2)Edit contact (3)Delete contact (4)Print Address Book (0)Go back to main menu -> ");
             int choice = sc.nextInt();
             switch (choice) {
                 case ADD_CONTACT -> {
@@ -113,8 +128,63 @@ public class AddressBook {
                 case EDIT_CONTACT -> editContact();
                 case DELETE_CONTACT -> deleteContact();
                 case PRINT_BOOK -> printAddressBook();
+                case BACK_TO_MAIN_MENU -> {
+                    return;
+                }
+                default -> System.out.println("Wrong input");
             }
-            if (choice == 0) break;
+        }
+    }
+
+    public static void printAllBooks() {
+        for (Map.Entry<String, AddressBook> entry : DICTIONARY.entrySet()) {
+            System.out.println("~~~~" + entry.getKey() + "~~~~~");
+            entry.getValue().printAddressBook();
+        }
+    }
+
+    public static void createAddressBook() {
+        System.out.print("Enter name of address book : ");
+        String name = sc.nextLine();
+        if (DICTIONARY.containsKey(name)) {
+            System.out.println("Book already exists");
+            System.out.println();
+            return;
+        }
+        AddressBook book = new AddressBook();
+        DICTIONARY.put(name, book);
+        book.operateBook(name);
+    }
+
+    public static void chooseAddressBook() {
+        System.out.print("Enter name of address book : ");
+        String name = sc.nextLine();
+        if (DICTIONARY.containsKey(name))
+            DICTIONARY.get(name).operateBook(name);
+        else
+            System.out.println("Book doesn't exist");
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        final int CREATE_ADDRESS_BOOK = 1;
+        final int CHOOSE_ADDRESS_BOOK = 2;
+        final int PRINT_ALL_BOOKS = 3;
+        final int EXIT = 0;
+        while (true) {
+            System.out.println();
+            System.out.print("Enter choice : (1)Create new address book (2)Choose an address book (3)Print dictionary (0)Exit : ");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case CREATE_ADDRESS_BOOK -> createAddressBook();
+                case CHOOSE_ADDRESS_BOOK -> chooseAddressBook();
+                case PRINT_ALL_BOOKS -> printAllBooks();
+                case EXIT -> {
+                    return;
+                }
+                default -> System.out.println("Wrong input");
+            }
         }
     }
 }

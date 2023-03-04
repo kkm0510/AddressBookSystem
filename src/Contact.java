@@ -13,19 +13,22 @@ public class Contact {
 
     public Contact(){
         Scanner sc=new Scanner(System.in);
-        System.out.println("~~~~New Entry~~~~ ");
         System.out.print("Enter first name : ");
-        firstName=sc.nextLine();
+        firstName=sc.next();
+        sc.nextLine();
         System.out.print("Enter last name : ");
-        lastName=sc.nextLine();
+        lastName=sc.next();
+        sc.nextLine();
         System.out.print("Enter address : ");
         address=sc.nextLine();
         System.out.print("Enter city : ");
-        city=sc.nextLine();
+        city=sc.next();
+        sc.nextLine();
         System.out.print("Enter state : ");
         state=sc.nextLine();
         System.out.print("Enter pin : ");
         pin=sc.nextInt();
+        sc.nextLine();
         System.out.print("Enter phone number : ");
         phoneNumber=sc.nextLong();
         sc.nextLine();
