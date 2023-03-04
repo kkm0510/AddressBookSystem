@@ -32,7 +32,7 @@ public class AddressBook {
         for (int i=0; i< book.size(); i++) {
             if (book.get(i).firstName.equals(firstName) && book.get(i).lastName.equals(lastName)) {
                 sc.nextLine();
-                System.out.print("What do you want to edit? (1)first name (2)last name (3)address (4)city (5)state (6)pin (7)phone number (8)email (9)Everything -> ");
+                System.out.print("What do you want to edit? (1)first name (2)last name (3)address (4)city (5)state (6)pin (7)phone number (8)email (9)everything -> ");
                 int choice = sc.nextInt();
                 switch (choice) {
                     case FIRST_NAME -> {
@@ -136,7 +136,7 @@ public class AddressBook {
         }
     }
 
-    public static void printAllBooks() {
+    public static void printDictionary() {
         for (Map.Entry<String, AddressBook> entry : DICTIONARY.entrySet()) {
             System.out.println("~~~~" + entry.getKey() + "~~~~~");
             entry.getValue().printAddressBook();
@@ -179,7 +179,7 @@ public class AddressBook {
             switch (choice) {
                 case CREATE_ADDRESS_BOOK -> createAddressBook();
                 case CHOOSE_ADDRESS_BOOK -> chooseAddressBook();
-                case PRINT_ALL_BOOKS -> printAllBooks();
+                case PRINT_ALL_BOOKS -> printDictionary();
                 case EXIT -> {
                     return;
                 }
