@@ -7,6 +7,16 @@ public class AddressBook {
     static Scanner sc = new Scanner(System.in);
 
     public static void editContact() {
+
+        final int FIRST_NAME=1;
+        final int LAST_NAME=2;
+        final int ADDRESS=3;
+        final int CITY=4;
+        final int STATE=5;
+        final int PIN=6;
+        final int PHONE_NUMBER=7;
+        final int EMAIL=8;
+
         sc.nextLine();
         System.out.print("Enter first name : ");
         String firstName = sc.nextLine();
@@ -18,34 +28,39 @@ public class AddressBook {
                 System.out.print("What do you want to edit? (1)first name (2)last name (3)address (4)city (5)state (6)pin (7)phone number (8)email -> ");
                 int choice = sc.nextInt();
                 switch (choice) {
-                    case 1 -> {
+                    case FIRST_NAME -> {
                         System.out.print("Enter new first name : ");
                         c.firstName = sc.nextLine();
                     }
-                    case 2 -> {
+                    case LAST_NAME -> {
                         System.out.print("Enter new last name : ");
                         c.lastName = sc.nextLine();
                     }
-                    case 3 -> {
+                    case ADDRESS -> {
                         System.out.print("Enter new address : ");
                         c.address = sc.nextLine();
                     }
-                    case 4 -> {
+                    case  CITY -> {
                         System.out.print("Enter new city : ");
                         c.city = sc.nextLine();
                     }
-                    case 5 -> {
+                    case STATE -> {
                         System.out.print("Enter new state : ");
                         c.state = sc.nextLine();
                     }
-                    case 6 -> {
+                    case PIN -> {
                         System.out.print("Enter new pin : ");
                         c.pin = sc.nextInt();
                     }
-                    case 7 -> {
+                    case PHONE_NUMBER -> {
                         System.out.print("Enter new phone number : ");
                         c.phoneNumber = sc.nextLong();
                     }
+                    case EMAIL -> {
+                        System.out.print("Enter new EMAIL : ");
+                        c.email = sc.nextLine();
+                    }
+
                 }
                 System.out.println("Contact edited successfully");
                 sc.nextLine();
@@ -84,17 +99,21 @@ public class AddressBook {
     }
 
     public static void main(String[] args) {
+        final int ADD_CONTACT=1;
+        final int EDIT_CONTACT=2;
+        final int DELETE_CONTACT=3;
+        final int PRINT_BOOK=4;
         while (true) {
             System.out.print("Enter choice : (1)Add contact (2)edit contact (3)delete contact (4)Print Address Book (0)Exit -> ");
             int choice = sc.nextInt();
             switch (choice) {
-                case 1 -> {
+                case ADD_CONTACT -> {
                     Contact person = new Contact();
                     book.add(person);
                 }
-                case 2 -> editContact();
-                case 3 -> deleteContact();
-                case 4 -> printAddressBook();
+                case EDIT_CONTACT -> editContact();
+                case DELETE_CONTACT -> deleteContact();
+                case PRINT_BOOK -> printAddressBook();
             }
             if (choice == 0) break;
         }
