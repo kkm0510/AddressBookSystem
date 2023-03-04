@@ -7,7 +7,6 @@ public class AddressBook {
     static Scanner sc = new Scanner(System.in);
 
     public static void editContact() {
-
         final int FIRST_NAME=1;
         final int LAST_NAME=2;
         final int ADDRESS=3;
