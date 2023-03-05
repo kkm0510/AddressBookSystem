@@ -6,14 +6,14 @@ import java.util.Scanner;
 public class AddressBook {
 
     static Scanner sc = new Scanner(System.in);
-    static final Map<String, AddressBook> DICTIONARY = new HashMap<>();
+    static final Map<String, ArrayList<Contact>> DICTIONARY = new HashMap<>();
     ArrayList<Contact> book;
 
     public AddressBook() {
         book = new ArrayList<>();
     }
 
-    public void editContact() {
+    public static void editContact(ArrayList<Contact> book) {
         final int FIRST_NAME = 1;
         final int LAST_NAME = 2;
         final int ADDRESS = 3;
@@ -79,7 +79,7 @@ public class AddressBook {
         System.out.println();
     }
 
-    public void deleteContact() {
+    public static void deleteContact(ArrayList<Contact> book) {
         System.out.print("Enter first name : ");
         String firstName = sc.next();
         System.out.print("Enter last name : ");
@@ -97,7 +97,7 @@ public class AddressBook {
         System.out.println();
     }
 
-    public void printAddressBook() {
+    public static void printAddressBook(ArrayList<Contact> book) {
         for (Contact c : book) {
             System.out.println("~~~~~~");
             System.out.println("Name : " + c.firstName + " " + c.lastName);
@@ -111,7 +111,7 @@ public class AddressBook {
         }
     }
 
-    public void operateBook(String bookName) {
+    public static void operateBook(String bookName, ArrayList<Contact> book) {
         final int ADD_CONTACT = 1;
         final int EDIT_CONTACT = 2;
         final int DELETE_CONTACT = 3;
@@ -125,9 +125,9 @@ public class AddressBook {
                     Contact person = new Contact();
                     book.add(person);
                 }
-                case EDIT_CONTACT -> editContact();
-                case DELETE_CONTACT -> deleteContact();
-                case PRINT_BOOK -> printAddressBook();
+                case EDIT_CONTACT -> editContact(book);
+                case DELETE_CONTACT -> deleteContact(book);
+                case PRINT_BOOK -> printAddressBook(book);
                 case BACK_TO_MAIN_MENU -> {
                     return;
                 }
@@ -137,9 +137,9 @@ public class AddressBook {
     }
 
     public static void printDictionary() {
-        for (Map.Entry<String, AddressBook> entry : DICTIONARY.entrySet()) {
+        for (Map.Entry<String, ArrayList<Contact>> entry : DICTIONARY.entrySet()) {
             System.out.println("~~~~" + entry.getKey() + "~~~~~");
-            entry.getValue().printAddressBook();
+            printAddressBook(entry.getValue());
         }
     }
 
@@ -151,16 +151,16 @@ public class AddressBook {
             System.out.println();
             return;
         }
-        AddressBook book = new AddressBook();
-        DICTIONARY.put(name, book);
-        book.operateBook(name);
+        AddressBook address = new AddressBook();
+        DICTIONARY.put(name, address.book);
+        operateBook(name, address.book);
     }
 
     public static void chooseAddressBook() {
         System.out.print("Enter name of address book : ");
         String name = sc.nextLine();
         if (DICTIONARY.containsKey(name))
-            DICTIONARY.get(name).operateBook(name);
+            operateBook(name, DICTIONARY.get(name));
         else
             System.out.println("Book doesn't exist");
         System.out.println();
