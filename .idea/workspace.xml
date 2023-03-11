@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43f655bd-1e2b-488e-84a4-6b3612d61d0f" name="Changes" comment="REFACTORED : changed cases to constants">
+    <list default="true" id="43f655bd-1e2b-488e-84a4-6b3612d61d0f" name="Changes" comment="REFACTORED : added getters and setters and made methods non static">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AddressBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddressBook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contact.java" afterDir="false" />
@@ -24,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="UC6(2)-ARRAYLIST_ONLY" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -35,13 +35,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/DELL/OneDrive/Desktop/Assignments/AddressBookSystem&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/DELL/OneDrive/Desktop/Assignments/AddressBookSystem"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -107,7 +107,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677924849286</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="REFACTORED : added getters and setters and made methods non static">
+      <created>1678193288848</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1678193288848</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -119,6 +126,7 @@
     <MESSAGE value="ADDED : code to print address book entries" />
     <MESSAGE value="ADDED : code to add multiple contacts" />
     <MESSAGE value="REFACTORED : changed function name" />
-    <option name="LAST_COMMIT_MESSAGE" value="REFACTORED : changed function name" />
+    <MESSAGE value="REFACTORED : added getters and setters and made methods non static" />
+    <option name="LAST_COMMIT_MESSAGE" value="REFACTORED : added getters and setters and made methods non static" />
   </component>
 </project>
