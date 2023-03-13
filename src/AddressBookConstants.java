@@ -23,6 +23,4 @@ public class AddressBookConstants {
 
     static final int SEARCH_BY_NAME=1;
     static final int SEARCH_BY_PHONE_NUMBER=2;
-
-
 }

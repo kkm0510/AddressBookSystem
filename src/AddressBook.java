@@ -31,7 +31,7 @@ public class AddressBook {
             if (contact.getPhoneNumber().equals(phoneNumber)) {
                 System.out.println("Contact found in : " + bookName + " book");
                 System.out.println(contact + "\n");
-                contactFound=true;
+                contactFound = true;
             }
         }
         return contactFound;
@@ -65,12 +65,12 @@ public class AddressBook {
         return contactFound;
     }
 
-    public void searchContact(){
+    public void searchContact() {
         Scanner sc = new Scanner(System.in);
         System.out.print("\nChoose : \n(1) Search by Name (2)Search by Phone Number : ");
-        int choice=sc.nextInt();
+        int choice = sc.nextInt();
         sc.nextLine();
-        switch (choice){
+        switch (choice) {
             case AddressBookConstants.SEARCH_BY_NAME -> searchByName();
             case AddressBookConstants.SEARCH_BY_PHONE_NUMBER -> searchByNumber();
             default -> System.out.println("Wrong Input");

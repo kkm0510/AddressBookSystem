@@ -14,7 +14,7 @@ public class AddressBookMain {
                 case AddressBookConstants.CREATE_ADDRESS_BOOK -> addressBook.createAddressBook();
                 case AddressBookConstants.CHOOSE_ADDRESS_BOOK -> addressBook.chooseAddressBook();
                 case AddressBookConstants.PRINT_ALL_BOOKS -> {
-                    if(addressBook.dictionary.size()==0) System.out.println("No address book present");
+                    if (addressBook.dictionary.size() == 0) System.out.println("No address book present");
                     else System.out.println(addressBook.dictionary);
                 }
                 case AddressBookConstants.SEARCH_CONTACT -> addressBook.searchContact();
