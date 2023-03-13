@@ -8,12 +8,12 @@ public class AddressBook {
         dictionary = new HashMap<>();
     }
 
-    private boolean searchInIndividualBook(String bookName, ArrayList<Contact> book, String input, int type) {
+    private boolean searchInBook(String bookName, ArrayList<Contact> book, String input, int searchType) {
         boolean contactFound = false;
         for (Contact contact : book) {
-            if (type == AddressBookConstants.SEARCH_BY_NAME
+            if (searchType == AddressBookConstants.SEARCH_BY_NAME
                     && (contact.getFirstName() + " " + contact.getLastName()).equals(input)
-                    || type == AddressBookConstants.SEARCH_BY_PHONE_NUMBER
+                    || searchType == AddressBookConstants.SEARCH_BY_PHONE_NUMBER
                     && contact.getPhoneNumber().equals(input)) {
                 System.out.println("Contact found in : " + bookName + " address book");
                 System.out.println(contact + "\n");
@@ -23,35 +23,51 @@ public class AddressBook {
         return contactFound;
     }
 
-    private void searchInDictionary(String input, int type) {
+    private void searchInDictionary(String input, int searchType) {
         boolean contactFound = false;
         int trueCount = 0;
         for (Map.Entry<String, ArrayList<Contact>> book : dictionary.entrySet()) {
-            contactFound = searchInIndividualBook(book.getKey(), book.getValue(), input, type);
+            contactFound = searchInBook(book.getKey(), book.getValue(), input, searchType);
             if (contactFound) trueCount++;
         }
         if (!contactFound && trueCount == 0) System.out.println("Contact not found \n");
     }
 
-    public void search() {
+    public void search(int callType, String bookName) {
         if (dictionary.size() == 0) {
             System.out.println("No address book present");
             return;
         }
+        if (callType == AddressBookConstants.SEARCH_IN_BOOK && dictionary.get(bookName).size() == 0) {
+            System.out.println("Address book is empty");
+            return;
+        }
         String firstName, lastName, phoneNumber;
         Scanner sc = new Scanner(System.in);
-        System.out.print("\nChoose : \n(1) Search by Name (2)Search by Phone Number (0)Go back to main menu : ");
+        System.out.print("\nChoose : \n(1) Search by Name (2)Search by Phone Number (0)Go back to previous menu : ");
         int choice = sc.nextInt();
         sc.nextLine();
         switch (choice) {
             case AddressBookConstants.SEARCH_BY_NAME -> {
                 firstName = inputCorrectName(AddressBookConstants.FIRST);
                 lastName = inputCorrectName(AddressBookConstants.LAST);
-                searchInDictionary(firstName + " " + lastName, AddressBookConstants.SEARCH_BY_NAME);
+                if (callType == AddressBookConstants.SEARCH_IN_BOOK) {
+                    boolean contactFound = searchInBook(bookName, dictionary.get(bookName),
+                            firstName + " " + lastName, AddressBookConstants.SEARCH_BY_NAME);
+                    if (!contactFound) System.out.println("Contact not found \n");
+                } else {
+                    searchInDictionary(firstName + " " + lastName, AddressBookConstants.SEARCH_BY_NAME);
+                }
             }
             case AddressBookConstants.SEARCH_BY_PHONE_NUMBER -> {
                 phoneNumber = inputCorrectNumber(AddressBookConstants.PHONE_NUM);
-                searchInDictionary(phoneNumber, AddressBookConstants.SEARCH_BY_PHONE_NUMBER);
+                if (callType == AddressBookConstants.SEARCH_IN_BOOK) {
+                    boolean contactFound = searchInBook(bookName,
+                            dictionary.get(bookName), phoneNumber, AddressBookConstants.SEARCH_BY_PHONE_NUMBER);
+                    if (!contactFound) System.out.println("Contact not found \n");
+                } else {
+                    searchInDictionary(phoneNumber, AddressBookConstants.SEARCH_BY_PHONE_NUMBER);
+                }
             }
             case AddressBookConstants.EXIT -> {
 
@@ -163,12 +179,13 @@ public class AddressBook {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.print("\n" + bookName + " -> \n(1)Add contacts (2)Edit contact " +
-                    "(3)Delete contact (4)Print Address Book (0)Go back to main menu -> ");
+                    "(3)Delete contact (4)Search contact (5)Print Address Book  (0)Go back to main menu -> ");
             int choice = sc.nextInt();
             switch (choice) {
                 case AddressBookConstants.ADD_CONTACT -> addContacts(book);
                 case AddressBookConstants.EDIT_CONTACT -> editContact(book);
                 case AddressBookConstants.DELETE_CONTACT -> deleteContact(book);
+                case AddressBookConstants.SEARCH_CONTACT -> search(AddressBookConstants.SEARCH_IN_BOOK, bookName);
                 case AddressBookConstants.PRINT_BOOK -> {
                     if (book.size() == 0) System.out.println("AddressBook is empty");
                     else printAddressBook(book);
@@ -249,18 +266,17 @@ public class AddressBook {
         Scanner sc = new Scanner(System.in);
         Set<Character> set;
         while (true) {
-            set=new HashSet<>();
+            set = new HashSet<>();
             System.out.print("\nWhat all do you want to edit? \n(1)First name " +
                     "(2)Last name (3)Address (4)City (5)State (6)Pin (7)Phone number (8)Email -> ");
             String toEdit = sc.nextLine();
-            if (checkToEditIsLegit(set, toEdit)){
-                StringBuilder toEditWithoutDuplicates=new StringBuilder();
-                for(Character c:set){
+            if (checkToEditIsLegit(set, toEdit)) {
+                StringBuilder toEditWithoutDuplicates = new StringBuilder();
+                for (Character c : set) {
                     toEditWithoutDuplicates.append(c);
                 }
                 return toEditWithoutDuplicates.toString();
-            }
-            else {
+            } else {
                 System.out.println("Illegal Input!!!");
             }
         }
@@ -303,7 +319,7 @@ public class AddressBook {
             return;
         }
         for (Map.Entry<String, ArrayList<Contact>> book : dictionary.entrySet()) {
-            if(book.getValue().size()==0) continue;
+            if (book.getValue().size() == 0) continue;
             System.out.println(book.getKey() + " -> ");
             printAddressBook(book.getValue());
         }

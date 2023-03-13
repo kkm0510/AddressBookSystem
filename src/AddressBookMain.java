@@ -14,7 +14,8 @@ public class AddressBookMain {
                 case AddressBookConstants.CREATE_ADDRESS_BOOK -> addressBook.createAddressBook();
                 case AddressBookConstants.CHOOSE_ADDRESS_BOOK -> addressBook.chooseAddressBook();
                 case AddressBookConstants.PRINT_DICTIONARY -> addressBook.printDictionary();
-                case AddressBookConstants.SEARCH_CONTACT -> addressBook.search();
+                case AddressBookConstants.SEARCH_CONTACT ->
+                        addressBook.search(AddressBookConstants.SEARCH_IN_DICTIONARY, "");
                 case AddressBookConstants.EXIT -> {
                     return;
                 }
