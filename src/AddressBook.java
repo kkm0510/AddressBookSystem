@@ -31,6 +31,7 @@ public class AddressBook {
             if (contact.getPhoneNumber().equals(phoneNumber)) {
                 System.out.println("Contact found in : " + bookName + " book");
                 System.out.println(contact + "\n");
+                contactFound=true;
             }
         }
         return contactFound;
