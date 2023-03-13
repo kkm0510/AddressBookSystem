@@ -2,7 +2,7 @@ public class AddressBookConstants {
 
     static final int CREATE_ADDRESS_BOOK = 1;
     static final int CHOOSE_ADDRESS_BOOK = 2;
-    static final int PRINT_ALL_BOOKS = 3;
+    static final int PRINT_DICTIONARY = 3;
     static final int SEARCH_CONTACT = 4;
     static final int EXIT = 0;
 
@@ -23,4 +23,10 @@ public class AddressBookConstants {
 
     static final int SEARCH_BY_NAME=1;
     static final int SEARCH_BY_PHONE_NUMBER=2;
+
+    static final String PIN_NUM="pin";
+    static final String PHONE_NUM="phone number";
+
+    static final String FIRST="first name";
+    static final String LAST="last name";
 }
