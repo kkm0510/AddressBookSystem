@@ -6,8 +6,8 @@ public class Contact {
     private String address;
     private String city;
     private String state;
-    private int pin;
-    private long phoneNumber;
+    private String pin;
+    private String phoneNumber;
     private String email;
 
 
@@ -51,19 +51,19 @@ public class Contact {
         this.state = state;
     }
 
-    public int getPin() {
+    public String getPin() {
         return pin;
     }
 
-    public void setPin(int pin) {
+    public void setPin(String pin) {
         this.pin = pin;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
