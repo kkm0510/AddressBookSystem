@@ -103,7 +103,8 @@ public class AddressBook {
         for (Contact contact : book) {
             if (contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName)) {
                 sc.nextLine();
-                System.out.print("What do you want to edit? (1)first name (2)last name (3)address (4)city (5)state (6)pin (7)phone number (8)email (9)everything -> ");
+                System.out.print("What do you want to edit? (1)first name (2)last name (3)address" +
+                        " (4)city (5)state (6)pin (7)phone number (8)email (9)everything -> ");
                 int choice = sc.nextInt();
                 switch (choice) {
                     case FIRST_NAME -> {
@@ -175,7 +176,8 @@ public class AddressBook {
         final int PRINT_BOOK = 4;
         final int BACK_TO_MAIN_MENU = 0;
         while (true) {
-            System.out.print(bookName + " -> Enter choice : (1)Add contact (2)Edit contact (3)Delete contact (4)Print Address Book (0)Go back to main menu -> ");
+            System.out.print(bookName + " -> Enter choice : (1)Add contact (2)Edit contact " +
+                    "(3)Delete contact (4)Print Address Book (0)Go back to main menu -> ");
             int choice = sc.nextInt();
             switch (choice) {
                 case ADD_CONTACT -> {
@@ -197,13 +199,6 @@ public class AddressBook {
         }
     }
 
-    public String toString() {
-        StringBuilder s = new StringBuilder();
-        for (Map.Entry<String, ArrayList<Contact>> book : DICTIONARY.entrySet()) {
-            s.append(book).append("   ");
-        }
-        return s.toString();
-    }
 
     public void createAddressBook() {
         System.out.print("Enter name of address book : ");
@@ -219,11 +214,11 @@ public class AddressBook {
     }
 
     public void chooseAddressBook() {
-        if(DICTIONARY.size()==0){
+        if (DICTIONARY.size() == 0) {
             System.out.println("No address book present");
         }
         System.out.println("Address Books :- ");
-        for(String name : DICTIONARY.keySet()){
+        for (String name : DICTIONARY.keySet()) {
             System.out.println(name);
         }
         System.out.print("Enter name of address book : ");
@@ -242,18 +237,20 @@ public class AddressBook {
         final int SEARCH_CONTACT_BY_NAME = 4;
         final int SEARCH_CONTACT_BY_PHONE_NUMBER = 5;
         final int EXIT = 0;
+
         AddressBook addressBook = new AddressBook();
 
         while (true) {
             System.out.println();
-            System.out.print("Enter choice : (1)Create new address book (2)Choose an address book (3)Print dictionary (4)Search contact by name (5)Search contact by phone number (0)Exit : ");
+            System.out.print("Enter choice : (1)Create new address book (2)Choose an address book " +
+                    "(3)Print dictionary (4)Search contact by name (5)Search contact by phone number (0)Exit : ");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
                 case CREATE_ADDRESS_BOOK -> addressBook.createAddressBook();
                 case CHOOSE_ADDRESS_BOOK -> addressBook.chooseAddressBook();
                 case PRINT_ALL_BOOKS -> {
-                    System.out.println(addressBook);
+                    System.out.println(addressBook.DICTIONARY);
                     System.out.println();
                 }
                 case SEARCH_CONTACT_BY_NAME -> addressBook.searchByName();
