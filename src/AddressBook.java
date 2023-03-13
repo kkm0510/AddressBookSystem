@@ -70,13 +70,12 @@ public class AddressBook {
                 }
             }
             case AddressBookConstants.EXIT -> {
-
             }
             default -> System.out.println("Wrong Input");
         }
     }
 
-    public void takeInputInContact(Contact contact) {
+    private void takeInputInContact(Contact contact) {
         Scanner sc = new Scanner(System.in);
         contact.setFirstName(inputCorrectName(AddressBookConstants.FIRST));
         contact.setLastName(inputCorrectName(AddressBookConstants.LAST));
@@ -94,7 +93,7 @@ public class AddressBook {
         System.out.println();
     }
 
-    public void editContact(ArrayList<Contact> book) {
+    private void editContact(ArrayList<Contact> book) {
         if (book.size() == 0) {
             System.out.println("AddressBook is empty");
             return;
@@ -145,7 +144,7 @@ public class AddressBook {
         System.out.println("Contact doesn't exist in address book");
     }
 
-    public void deleteContact(ArrayList<Contact> book) {
+    private void deleteContact(ArrayList<Contact> book) {
         if (book.size() == 0) {
             System.out.println("AddressBook is empty");
             return;
@@ -307,7 +306,7 @@ public class AddressBook {
         }
     }
 
-    public void printAddressBook(ArrayList<Contact> book) {
+    private void printAddressBook(ArrayList<Contact> book) {
         for (Contact contact : book)
             System.out.println(contact);
         System.out.println();
