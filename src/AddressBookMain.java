@@ -6,7 +6,7 @@ public class AddressBookMain {
         Scanner sc = new Scanner(System.in);
         AddressBook addressBook = new AddressBook();
         while (true) {
-            System.out.print("Main menu -> Enter choice : \n(1)Create new address book " +
+            System.out.print("\nMain menu -> \n(1)Create new address book " +
                     "(2)Choose an address book (3)Print dictionary (4)Search contact (0)Exit : ");
             int choice = sc.nextInt();
             sc.nextLine();
