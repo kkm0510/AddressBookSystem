@@ -1,4 +1,6 @@
+
 import java.util.Scanner;
+import static constants.AddressBookConstants.*;
 
 public class AddressBookMain {
 
@@ -11,12 +13,12 @@ public class AddressBookMain {
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
-                case AddressBookConstants.CREATE_ADDRESS_BOOK -> addressBook.createAddressBook();
-                case AddressBookConstants.CHOOSE_ADDRESS_BOOK -> addressBook.chooseAddressBook();
-                case AddressBookConstants.PRINT_DICTIONARY -> addressBook.printDictionary();
-                case AddressBookConstants.SEARCH_CONTACT ->
-                        addressBook.search(AddressBookConstants.SEARCH_IN_DICTIONARY, "");
-                case AddressBookConstants.EXIT -> {
+                case CREATE_ADDRESS_BOOK -> addressBook.createAddressBook();
+                case CHOOSE_ADDRESS_BOOK -> addressBook.chooseAddressBook();
+                case PRINT_DICTIONARY -> addressBook.printDictionary();
+                case SEARCH_CONTACT ->
+                        addressBook.search(SEARCH_IN_DICTIONARY, "");
+                case EXIT -> {
                     return;
                 }
                 default -> System.out.println("Wrong input");
