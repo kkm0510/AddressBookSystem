@@ -8,14 +8,17 @@ public class AddressBook {
         dictionary = new HashMap<>();
     }
 
-    private boolean searchInBook(String bookName, ArrayList<Contact> book, String input, int searchType) {
+    private boolean searchInBook(String bookName, ArrayList<Contact> book, String input, int searchType, int callType) {
         boolean contactFound = false;
         for (Contact contact : book) {
+
             if (searchType == AddressBookConstants.SEARCH_BY_NAME
                     && (contact.getFirstName() + " " + contact.getLastName()).equals(input)
                     || searchType == AddressBookConstants.SEARCH_BY_PHONE_NUMBER
                     && contact.getPhoneNumber().equals(input)) {
-                System.out.println("Contact found in : " + bookName + " address book");
+
+                if (callType == AddressBookConstants.SEARCH_IN_DICTIONARY)
+                    System.out.println("Contact found in : " + bookName + " address book");
                 System.out.println(contact + "\n");
                 contactFound = true;
             }
@@ -27,7 +30,8 @@ public class AddressBook {
         boolean contactFound = false;
         int trueCount = 0;
         for (Map.Entry<String, ArrayList<Contact>> book : dictionary.entrySet()) {
-            contactFound = searchInBook(book.getKey(), book.getValue(), input, searchType);
+            contactFound = searchInBook(book.getKey(), book.getValue(),
+                    input, searchType, AddressBookConstants.SEARCH_IN_DICTIONARY);
             if (contactFound) trueCount++;
         }
         if (!contactFound && trueCount == 0) System.out.println("Contact not found \n");
@@ -52,8 +56,11 @@ public class AddressBook {
                 firstName = inputCorrectName(AddressBookConstants.FIRST);
                 lastName = inputCorrectName(AddressBookConstants.LAST);
                 if (callType == AddressBookConstants.SEARCH_IN_BOOK) {
-                    boolean contactFound = searchInBook(bookName, dictionary.get(bookName),
-                            firstName + " " + lastName, AddressBookConstants.SEARCH_BY_NAME);
+
+                    boolean contactFound = searchInBook(bookName,
+                            dictionary.get(bookName), firstName + " " + lastName,
+                            AddressBookConstants.SEARCH_BY_NAME, AddressBookConstants.SEARCH_IN_BOOK);
+
                     if (!contactFound) System.out.println("Contact not found \n");
                 } else {
                     searchInDictionary(firstName + " " + lastName, AddressBookConstants.SEARCH_BY_NAME);
@@ -61,9 +68,13 @@ public class AddressBook {
             }
             case AddressBookConstants.SEARCH_BY_PHONE_NUMBER -> {
                 phoneNumber = inputCorrectNumber(AddressBookConstants.PHONE_NUM);
+
                 if (callType == AddressBookConstants.SEARCH_IN_BOOK) {
+
                     boolean contactFound = searchInBook(bookName,
-                            dictionary.get(bookName), phoneNumber, AddressBookConstants.SEARCH_BY_PHONE_NUMBER);
+                            dictionary.get(bookName), phoneNumber,
+                            AddressBookConstants.SEARCH_BY_PHONE_NUMBER, AddressBookConstants.SEARCH_IN_BOOK);
+
                     if (!contactFound) System.out.println("Contact not found \n");
                 } else {
                     searchInDictionary(phoneNumber, AddressBookConstants.SEARCH_BY_PHONE_NUMBER);
@@ -108,6 +119,7 @@ public class AddressBook {
                 for (int i = 0; i < toEdit.length(); i++) {
                     if (toEdit.charAt(i) == ' ') continue;
                     int choice = toEdit.charAt(i) - 48;
+
                     switch (choice) {
                         case AddressBookConstants.FIRST_NAME ->
                                 contact.setFirstName(inputCorrectName(AddressBookConstants.FIRST));
