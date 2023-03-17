@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43f655bd-1e2b-488e-84a4-6b3612d61d0f" name="Changes" comment="REFACTORED : modifiers of methods of AddressBook class">
-      <change afterPath="$PROJECT_DIR$/src/constants/AddressBookConstants.java" afterDir="false" />
+    <list default="true" id="43f655bd-1e2b-488e-84a4-6b3612d61d0f" name="Changes" comment="REFACTORED : created a separate package for constants and imported it">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AddressBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddressBook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AddressBookConstants.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AddressBookMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddressBookMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constants/AddressBookConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/AddressBookConstants.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="UC7" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,15 +42,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Git.Branch.Popup.ShowAllRemotes": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/DELL/OneDrive/Desktop/Assignments/Day16-AlgorithmPrograms",
-    "settings.editor.selected.configurable": "configurable.group.appearance"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/DELL/OneDrive/Desktop/Assignments/AddressBookSystem&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="AddressBookMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AddressBookMain" />
@@ -184,7 +183,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678736291311</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="REFACTORED : created a separate package for constants and imported it">
+      <created>1678768758599</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1678768758614</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -203,6 +209,7 @@
     <MESSAGE value="REFACTORED : code to add print methods" />
     <MESSAGE value="REFACTORED : code to add functionalities" />
     <MESSAGE value="REFACTORED : modifiers of methods of AddressBook class" />
-    <option name="LAST_COMMIT_MESSAGE" value="REFACTORED : modifiers of methods of AddressBook class" />
+    <MESSAGE value="REFACTORED : created a separate package for constants and imported it" />
+    <option name="LAST_COMMIT_MESSAGE" value="REFACTORED : created a separate package for constants and imported it" />
   </component>
 </project>

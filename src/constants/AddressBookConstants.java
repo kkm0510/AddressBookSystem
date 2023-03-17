@@ -25,12 +25,25 @@ public class AddressBookConstants {
     public static final int SEARCH_BY_NAME = 1;
     public static final int SEARCH_BY_PHONE_NUMBER = 2;
 
-    public static final String PIN_NUM = "pin";
-    public static final String PHONE_NUM = "phone number";
-
-    public static final String FIRST = "first name";
-    public static final String LAST = "last name";
-
     public static final int SEARCH_IN_BOOK = 1;
     public static final int SEARCH_IN_DICTIONARY = 2;
+
+    public static final String FIRST_NAME_INPUT = "first name";
+    public static final String LAST_NAME_INPUT = "last name";
+    public static final String PIN_INPUT = "pin";
+    public static final String PHONE_NUMBER_INPUT = "phone number";
+    public static final String CITY_INPUT = "city name";
+    public static final String STATE_INPUT = "state name";
+    public static final String EMAIL_INPUT = "email id";
+    public static final String ADDRESS_INPUT = "address";
+
+    public static final String VALID_NAME="^[A-Z][a-z]{2,}$";
+    public static final String VALID_PIN="^[0-9]{6}$";
+    public static final String VALID_MOBILE_NUMBER="^[0-9]{10}$";
+    public static final String VALID_EMAIL="^[a-zA-Z0-9]+[._+-]?[a-zA-Z0-9]+@[a-zA-Z0-9]+[.]+[a-z]{2,4}[.]?[a-z]{0,3}$";
+    public static final String VALID_CITY="^[A-Z][a-z]{3,}$";
+    public static final String VALID_STATE="^[A-Z][a-z]{2,}([ ][A-Z][a-z]{2,}){0,}$";
+    public static final String VALID_EDIT="^(?!.*([0-8]).*\1)[0-8]([.][0-8])*$";
+    public static final String VALID_ADDRESS="^[a-zA-Z0-9 -]{8,}$";
+
 }

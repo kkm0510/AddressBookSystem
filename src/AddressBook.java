@@ -1,6 +1,9 @@
 
 import static constants.AddressBookConstants.*;
+
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AddressBook {
 
@@ -13,12 +16,10 @@ public class AddressBook {
     private boolean searchInBook(String bookName, ArrayList<Contact> book, String input, int searchType, int callType) {
         boolean contactFound = false;
         for (Contact contact : book) {
-
             if (searchType == SEARCH_BY_NAME
                     && (contact.getFirstName() + " " + contact.getLastName()).equals(input)
                     || searchType == SEARCH_BY_PHONE_NUMBER
                     && contact.getPhoneNumber().equals(input)) {
-
                 if (callType == SEARCH_IN_DICTIONARY)
                     System.out.println("Contact found in : " + bookName + " address book");
                 System.out.println(contact + "\n");
@@ -55,28 +56,23 @@ public class AddressBook {
         sc.nextLine();
         switch (choice) {
             case SEARCH_BY_NAME -> {
-                firstName = inputCorrectName(FIRST);
-                lastName = inputCorrectName(LAST);
+                firstName = takeValidInput(FIRST_NAME_INPUT);
+                lastName = takeValidInput(LAST_NAME_INPUT);
                 if (callType == SEARCH_IN_BOOK) {
-
                     boolean contactFound = searchInBook(bookName,
                             dictionary.get(bookName), firstName + " " + lastName,
                             SEARCH_BY_NAME, SEARCH_IN_BOOK);
-
                     if (!contactFound) System.out.println("Contact not found \n");
                 } else {
                     searchInDictionary(firstName + " " + lastName, SEARCH_BY_NAME);
                 }
             }
             case SEARCH_BY_PHONE_NUMBER -> {
-                phoneNumber = inputCorrectNumber(PHONE_NUM);
-
+                phoneNumber = takeValidInput(PHONE_NUMBER_INPUT);
                 if (callType == SEARCH_IN_BOOK) {
-
                     boolean contactFound = searchInBook(bookName,
                             dictionary.get(bookName), phoneNumber,
                             SEARCH_BY_PHONE_NUMBER, SEARCH_IN_BOOK);
-
                     if (!contactFound) System.out.println("Contact not found \n");
                 } else {
                     searchInDictionary(phoneNumber, SEARCH_BY_PHONE_NUMBER);
@@ -89,21 +85,14 @@ public class AddressBook {
     }
 
     private void takeInputInContact(Contact contact) {
-        Scanner sc = new Scanner(System.in);
-        contact.setFirstName(inputCorrectName(FIRST));
-        contact.setLastName(inputCorrectName(LAST));
-        System.out.print("Enter address : ");
-        contact.setAddress(sc.nextLine());
-        System.out.print("Enter city : ");
-        contact.setCity(sc.next());
-        sc.nextLine();
-        System.out.print("Enter state : ");
-        contact.setState(sc.nextLine());
-        contact.setPin(inputCorrectNumber(PIN_NUM));
-        contact.setPhoneNumber(inputCorrectNumber(PHONE_NUM));
-        System.out.print("Enter email : ");
-        contact.setEmail(sc.nextLine());
-        System.out.println();
+        contact.setFirstName(takeValidInput(FIRST_NAME_INPUT));
+        contact.setLastName(takeValidInput(LAST_NAME_INPUT));
+        contact.setAddress(takeValidInput(ADDRESS_INPUT));
+        contact.setCity(takeValidInput(CITY_INPUT));
+        contact.setState(takeValidInput(STATE_INPUT));
+        contact.setPin(takeValidInput(PIN_INPUT));
+        contact.setPhoneNumber(takeValidInput(PHONE_NUMBER_INPUT));
+        contact.setEmail(takeValidInput(EMAIL_INPUT));
     }
 
     private void editContact(ArrayList<Contact> book) {
@@ -111,42 +100,25 @@ public class AddressBook {
             System.out.println("AddressBook is empty");
             return;
         }
-        Scanner sc = new Scanner(System.in);
-        String firstName = inputCorrectName(FIRST);
-        String lastName = inputCorrectName(LAST);
-
+        String firstName = takeValidInput(FIRST_NAME_INPUT);
+        String lastName = takeValidInput(LAST_NAME_INPUT);
         for (Contact contact : book) {
             if (contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName)) {
                 String toEdit = inputToEdit();
                 for (int i = 0; i < toEdit.length(); i++) {
                     if (toEdit.charAt(i) == ' ') continue;
                     int choice = toEdit.charAt(i) - 48;
-
                     switch (choice) {
-                        case FIRST_NAME ->
-                                contact.setFirstName(inputCorrectName(FIRST));
-                        case LAST_NAME ->
-                                contact.setLastName(inputCorrectName(LAST));
-                        case ADDRESS -> {
-                            System.out.print("Enter new address : ");
-                            contact.setAddress(sc.nextLine());
-                        }
-                        case CITY -> {
-                            System.out.print("Enter new city : ");
-                            contact.setCity(sc.next());
-                            sc.nextLine();
-                        }
-                        case STATE -> {
-                            System.out.print("Enter new state : ");
-                            contact.setState(sc.nextLine());
-                        }
-                        case PIN ->
-                                contact.setPin(inputCorrectNumber(PIN_NUM));
-                        case PHONE_NUMBER ->
-                                contact.setPhoneNumber(inputCorrectNumber(PHONE_NUM));
-                        case EMAIL -> {
-                            System.out.print("Enter new email : ");
-                            contact.setEmail(sc.nextLine());
+                        case FIRST_NAME -> contact.setFirstName(takeValidInput(FIRST_NAME_INPUT));
+                        case LAST_NAME -> contact.setLastName(takeValidInput(LAST_NAME_INPUT));
+                        case ADDRESS -> contact.setAddress(takeValidInput(ADDRESS_INPUT));
+                        case CITY -> contact.setCity(takeValidInput(CITY_INPUT));
+                        case STATE -> contact.setState(takeValidInput(STATE_INPUT));
+                        case PIN -> contact.setPin(takeValidInput(PIN_INPUT));
+                        case PHONE_NUMBER -> contact.setPhoneNumber(takeValidInput(PHONE_NUMBER_INPUT));
+                        case EMAIL -> contact.setEmail(takeValidInput(EMAIL_INPUT));
+                        case EXIT -> {
+                            return;
                         }
                         default -> System.out.println("Wrong input");
                     }
@@ -163,8 +135,8 @@ public class AddressBook {
             System.out.println("AddressBook is empty");
             return;
         }
-        String firstName = inputCorrectName(FIRST);
-        String lastName = inputCorrectName(LAST);
+        String firstName = takeValidInput(FIRST_NAME_INPUT);
+        String lastName = takeValidInput(LAST_NAME_INPUT);
         for (Contact c : book) {
             if (c.getFirstName().equals(firstName) && c.getLastName().equals(lastName)) {
                 book.remove(c);
@@ -221,7 +193,7 @@ public class AddressBook {
         }
         ArrayList<Contact> book = new ArrayList<>();
         dictionary.put(name, book);
-//        operateBook(name, book);
+        operateBook(name, book);
     }
 
     public void chooseAddressBook() {
@@ -242,81 +214,37 @@ public class AddressBook {
             System.out.println("Book doesn't exist \n");
     }
 
-    private boolean checkNameIsLegit(String name) {
-        for (int i = 0; i < name.length(); i++) {
-            if (!(name.charAt(i) >= 65 && name.charAt(i) <= 90 || name.charAt(i) >= 97 && name.charAt(i) <= 122)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private String inputCorrectName(String type) {
+    private String takeValidInput(String type) {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.print("Enter " + type + " : ");
-            String name = sc.next();
-            sc.nextLine();
-            if (!checkNameIsLegit(name))
-                System.out.println("Illegal Input!!!");
-            else {
-                return name;
+            String name = sc.nextLine();
+            Pattern p = null;
+            switch(type){
+                case FIRST_NAME_INPUT, LAST_NAME_INPUT -> p = Pattern.compile(VALID_NAME);
+                case PHONE_NUMBER_INPUT -> p = Pattern.compile(VALID_MOBILE_NUMBER);
+                case PIN_INPUT -> p = Pattern.compile(VALID_PIN);
+                case CITY_INPUT -> p = Pattern.compile(VALID_CITY);
+                case STATE_INPUT -> p = Pattern.compile(VALID_STATE);
+                case EMAIL_INPUT -> p = Pattern.compile(VALID_EMAIL);
+                case ADDRESS_INPUT -> p=Pattern.compile(VALID_ADDRESS);
             }
+            Matcher m = p.matcher(name);
+            if (m.matches()) return name;
+            else System.out.println("Illegal Input!!!");
         }
-    }
-
-    private boolean checkToEditIsLegit(Set<Character> set, String toEdit) {
-        for (int i = 0; i < toEdit.length(); i++) {
-            if (!(toEdit.charAt(i) >= 49 && toEdit.charAt(i) <= 56 || toEdit.charAt(i) == ' ')) {
-                return false;
-            }
-            set.add(toEdit.charAt(i));
-        }
-        return true;
     }
 
     private String inputToEdit() {
         Scanner sc = new Scanner(System.in);
-        Set<Character> set;
         while (true) {
-            set = new HashSet<>();
-            System.out.print("\nWhat all do you want to edit? \n(1)First name " +
-                    "(2)Last name (3)Address (4)City (5)State (6)Pin (7)Phone number (8)Email -> ");
+            System.out.print("\nWhat all do you want to edit? \n(1)First name (2)Last name" +
+                    " (3)Address (4)City (5)State (6)Pin (7)Phone number (8)Email -> ");
             String toEdit = sc.nextLine();
-            if (checkToEditIsLegit(set, toEdit)) {
-                StringBuilder toEditWithoutDuplicates = new StringBuilder();
-                for (Character c : set) {
-                    toEditWithoutDuplicates.append(c);
-                }
-                return toEditWithoutDuplicates.toString();
-            } else {
-                System.out.println("Illegal Input!!!");
-            }
-        }
-    }
-
-    private boolean checkNumberIsLegit(String num, String type) {
-        if (type.equals(PIN_NUM) && num.length() != 6) return false;
-        if (type.equals(PHONE_NUM) && num.length() != 10) return false;
-        for (int i = 0; i < num.length(); i++) {
-            if (!(num.charAt(i) >= 48 && num.charAt(i) <= 57)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private String inputCorrectNumber(String type) {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.print("Enter " + type + " : ");
-            String num = sc.next();
-            sc.nextLine();
-            if (!checkNumberIsLegit(num, type))
-                System.out.println("Illegal Input!!!");
-            else {
-                return num;
-            }
+            Pattern p = Pattern.compile(VALID_EDIT);
+            Matcher m = p.matcher(toEdit);
+            if (m.matches()) return toEdit;
+            else System.out.println("Illegal Input!!!");
         }
     }
 

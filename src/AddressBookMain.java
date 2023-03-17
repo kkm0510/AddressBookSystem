@@ -1,5 +1,6 @@
 
 import java.util.Scanner;
+
 import static constants.AddressBookConstants.*;
 
 public class AddressBookMain {
@@ -16,8 +17,7 @@ public class AddressBookMain {
                 case CREATE_ADDRESS_BOOK -> addressBook.createAddressBook();
                 case CHOOSE_ADDRESS_BOOK -> addressBook.chooseAddressBook();
                 case PRINT_DICTIONARY -> addressBook.printDictionary();
-                case SEARCH_CONTACT ->
-                        addressBook.search(SEARCH_IN_DICTIONARY, "");
+                case SEARCH_CONTACT -> addressBook.search(SEARCH_IN_DICTIONARY, "");
                 case EXIT -> {
                     return;
                 }
