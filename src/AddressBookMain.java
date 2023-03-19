@@ -7,17 +7,16 @@ public class AddressBookMain {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        AddressBook addressBook = new AddressBook();
+        AddressBookDictionary addressBookDictionary = new AddressBookDictionary();
         while (true) {
             System.out.print("\nMain menu -> \n(1)Create new address book " +
-                    "(2)Choose an address book (3)Print dictionary (4)Search contact (0)Exit : ");
+                    "(2)Choose an address book (3)Print dictionary (0)Exit : ");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
-                case CREATE_ADDRESS_BOOK -> addressBook.createAddressBook();
-                case CHOOSE_ADDRESS_BOOK -> addressBook.chooseAddressBook();
-                case PRINT_DICTIONARY -> addressBook.printDictionary();
-                case SEARCH_CONTACT -> addressBook.search(SEARCH_IN_DICTIONARY, "");
+                case CREATE_ADDRESS_BOOK -> addressBookDictionary.createAddressBook();
+                case CHOOSE_ADDRESS_BOOK -> addressBookDictionary.chooseAddressBook();
+                case PRINT_DICTIONARY -> addressBookDictionary.printDictionary();
                 case EXIT -> {
                     return;
                 }
@@ -25,5 +24,4 @@ public class AddressBookMain {
             }
         }
     }
-
 }
