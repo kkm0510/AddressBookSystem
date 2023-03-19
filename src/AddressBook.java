@@ -20,11 +20,16 @@ public class AddressBook {
             System.out.print("\n" + bookName + " -> \n(1)Add contacts (2)Edit contact " +
                     "(3)Delete contact (4)Search contact (5)Print Address Book  (0)Go back to main menu -> ");
             int choice = sc.nextInt();
+            sc.nextLine();
             switch (choice) {
                 case ADD_CONTACT -> addContacts();
                 case EDIT_CONTACT -> editContact();
                 case DELETE_CONTACT -> deleteContact();
-                case SEARCH_CONTACT -> takeInputAndSearchContact();
+                case SEARCH -> {
+                    String firstName = takeValidInput(FIRST_NAME_INPUT);
+                    String lastName = takeValidInput(LAST_NAME_INPUT);
+                    searchContactInBook(firstName, lastName);
+                }
                 case PRINT_BOOK -> {
                     if (book.size() == 0) System.out.println("AddressBook is empty");
                     else System.out.println(this);
@@ -32,7 +37,7 @@ public class AddressBook {
                 case EXIT -> {
                     return;
                 }
-                default -> System.out.println("Wrong input");
+                default -> System.out.println("Wrong input!!!");
             }
         }
     }
@@ -57,7 +62,6 @@ public class AddressBook {
         contact.setLastName(takeValidInput(LAST_NAME_INPUT));
         if (book.contains(contact)) {
             System.out.println("Contact already exists!!!");
-            searchContact(contact.getFirstName(), contact.getLastName());
             System.out.println();
             Scanner sc = new Scanner(System.in);
             System.out.print("(1)Continue (0)Go back to last menu : ");
@@ -70,6 +74,7 @@ public class AddressBook {
                 case EXIT -> {
                     return EXIT;
                 }
+                default -> System.out.println("Wrong input!!!");
             }
             System.out.println();
         }
@@ -98,7 +103,7 @@ public class AddressBook {
             System.out.println("Contact doesn't exist!!!");
             return;
         }
-        String toEdit = inputToEdit();
+        String toEdit = validInputToEdit();
         for (int i = 0; i < toEdit.length(); i++) {
             if (toEdit.charAt(i) == ' ') continue;
             int choice = toEdit.charAt(i) - 48;
@@ -121,7 +126,7 @@ public class AddressBook {
         System.out.println(contact);
     }
 
-    private String inputToEdit() {
+    private String validInputToEdit() {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.print("\nWhat all do you want to edit? \n(1)First name (2)Last name" +
@@ -153,40 +158,13 @@ public class AddressBook {
         System.out.println("Contact deleted");
     }
 
-    public void searchContact(String firstName, String lastName) {
+    public void searchContactInBook(String firstName, String lastName) {
         Contact contact=book.stream()
                 .filter(c -> c.getFirstName().equals(firstName) && c.getLastName().equals(lastName))
                 .findAny()
                 .orElse(null);
         if(contact!=null) System.out.println(contact);
         else System.out.println("Contact doesn't exist!!!");
-    }
-
-    private void takeInputAndSearchContact() {
-        String firstName = takeValidInput(FIRST_NAME_INPUT);
-        String lastName = takeValidInput(LAST_NAME_INPUT);
-        searchContact(firstName, lastName);
-    }
-
-    private String takeValidInput(String type) {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.print("Enter " + type + " : ");
-            String name = sc.nextLine();
-            Pattern p = null;
-            switch (type) {
-                case FIRST_NAME_INPUT, LAST_NAME_INPUT -> p = Pattern.compile(VALID_NAME);
-                case PHONE_NUMBER_INPUT -> p = Pattern.compile(VALID_MOBILE_NUMBER);
-                case PIN_INPUT -> p = Pattern.compile(VALID_PIN);
-                case CITY_INPUT -> p = Pattern.compile(VALID_CITY);
-                case STATE_INPUT -> p = Pattern.compile(VALID_STATE);
-                case EMAIL_INPUT -> p = Pattern.compile(VALID_EMAIL);
-                case ADDRESS_INPUT -> p = Pattern.compile(VALID_ADDRESS);
-            }
-            Matcher m = p.matcher(name);
-            if (m.matches()) return name;
-            else System.out.println("Illegal Input!!!");
-        }
     }
 
     @Override

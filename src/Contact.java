@@ -33,6 +33,14 @@ public class Contact {
         this.city = city;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
     public void setState(String state) {
         this.state = state;
     }
@@ -51,14 +59,14 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "[First Name: " + firstName +
-                " | Last Name: " + lastName +
-                " | Address: " + address +
-                " | City: " + city +
-                " | State: " + state +
-                " | Pin: " + pin +
-                " | Phone Number: " + phoneNumber +
-                " | Email: " + email + "]";
+        return "\nFirst Name: " + firstName +
+                "\nLast Name: " + lastName +
+                "\nAddress: " + address +
+                "\nCity: " + city +
+                "\nState: " + state +
+                "\nPin: " + pin +
+                "\nPhone Number: " + phoneNumber +
+                "\nEmail: " + email;
     }
 
     @Override
