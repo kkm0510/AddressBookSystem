@@ -8,16 +8,14 @@ public class AddressBookConstants {
 
     public static final int CREATE_ADDRESS_BOOK = 1;
     public static final int CHOOSE_ADDRESS_BOOK = 2;
-    public static final int PRINT_DICTIONARY = 3;
+    public static final int PRINT = 3;
     public static final int SEARCH = 4;
-    public static final int PRINT_CITY_DICTIONARY = 5;
-    public static final int PRINT_STATE_DICTIONARY = 6;
+    public static final int COUNT=5;
     public static final int EXIT = 0;
 
     public static final int ADD_CONTACT = 1;
     public static final int EDIT_CONTACT = 2;
-    public static final int DELETE_CONTACT = 3;
-    public static final int PRINT_BOOK = 5;
+    public static final int DELETE_CONTACT = 5;
     public static final int ENTER_AGAIN = 1;
 
     public static final int FIRST_NAME = 1;
@@ -52,6 +50,14 @@ public class AddressBookConstants {
     public static final int SEARCH_CONTACT_BY_NAME=1;
     public static final int SEARCH_CONTACT_IN_CITY=2;
     public static final int SEARCH_CONTACT_IN_STATE=3;
+
+    public static final int PRINT_MAIN_DICTIONARY=1;
+    public static final int PRINT_CITY_DICTIONARY=2;
+    public static final int PRINT_STATE_DICTIONARY=3;
+
+//    public static final int COUNT_IN_MAIN_DICTIONARY=1;
+    public static final int COUNT_IN_CITY_DICTIONARY=1;
+    public static final int COUNT_IN_STATE_DICTIONARY=2;
 
     public static String takeValidInput(String type) {
         Scanner sc = new Scanner(System.in);

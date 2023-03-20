@@ -18,19 +18,15 @@ public class AddressBook {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.print("\n" + bookName + " -> \n(1)Add contacts (2)Edit contact " +
-                    "(3)Delete contact (4)Search contact (5)Print Address Book  (0)Go back to main menu -> ");
+                    "(3)Print Address Book  (4)Search contact (5)Delete contact  (0)Go back to main menu -> ");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
                 case ADD_CONTACT -> addContacts();
                 case EDIT_CONTACT -> editContact();
                 case DELETE_CONTACT -> deleteContact();
-                case SEARCH -> {
-                    String firstName = takeValidInput(FIRST_NAME_INPUT);
-                    String lastName = takeValidInput(LAST_NAME_INPUT);
-                    searchContactInBook(firstName, lastName);
-                }
-                case PRINT_BOOK -> {
+                case SEARCH -> searchContactInBook();
+                case PRINT -> {
                     if (book.size() == 0) System.out.println("AddressBook is empty");
                     else System.out.println(this);
                 }
@@ -158,12 +154,14 @@ public class AddressBook {
         System.out.println("Contact deleted");
     }
 
-    public void searchContactInBook(String firstName, String lastName) {
-        Contact contact=book.stream()
+    public void searchContactInBook() {
+        String firstName = takeValidInput(FIRST_NAME_INPUT);
+        String lastName = takeValidInput(LAST_NAME_INPUT);
+        Contact contact = book.stream()
                 .filter(c -> c.getFirstName().equals(firstName) && c.getLastName().equals(lastName))
                 .findAny()
                 .orElse(null);
-        if(contact!=null) System.out.println(contact);
+        if (contact != null) System.out.println(contact);
         else System.out.println("Contact doesn't exist!!!");
     }
 
