@@ -10,6 +10,8 @@ public class AddressBookConstants {
     public static final int CHOOSE_ADDRESS_BOOK = 2;
     public static final int PRINT_DICTIONARY = 3;
     public static final int SEARCH = 4;
+    public static final int PRINT_CITY_DICTIONARY = 5;
+    public static final int PRINT_STATE_DICTIONARY = 6;
     public static final int EXIT = 0;
 
     public static final int ADD_CONTACT = 1;

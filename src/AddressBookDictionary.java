@@ -1,52 +1,59 @@
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static constants.AddressBookConstants.*;
+import static constants.AddressBookConstants.takeValidInput;
 
 public class AddressBookDictionary {
 
-    Map<String, AddressBook> dictionary;
+    Map<String, AddressBook> mainDictionary;
+    Map<String, List<Contact>> cityDictionary;
+    Map<String, List<Contact>> stateDictionary;
 
     public AddressBookDictionary() {
-        dictionary = new HashMap<>();
+        mainDictionary = new HashMap<>();
+        cityDictionary = new HashMap<>();
+        stateDictionary = new HashMap<>();
     }
 
     public void createAddressBook() {
         Scanner sc = new Scanner(System.in);
         System.out.print("\nEnter name of address book : ");
         String name = sc.nextLine();
-        if (dictionary.containsKey(name)) {
+        if (mainDictionary.containsKey(name)) {
             System.out.println("Book already exists \n");
             return;
         }
         AddressBook addressBook = new AddressBook(name);
-        dictionary.put(name, addressBook);
+        mainDictionary.put(name, addressBook);
         addressBook.operateBook();
     }
 
     public void chooseAddressBook() {
         Scanner sc = new Scanner(System.in);
-        if (dictionary.size() == 0) {
+        if (mainDictionary.size() == 0) {
             System.out.println("No address book present");
             return;
         }
         System.out.println("\nAddress Books :- ");
-        for (String name : dictionary.keySet()) {
+        for (String name : mainDictionary.keySet()) {
             System.out.println(name);
         }
         System.out.print("Choose address book : ");
         String name = sc.nextLine();
-        if (dictionary.containsKey(name))
-            dictionary.get(name).operateBook();
+        if (mainDictionary.containsKey(name))
+            mainDictionary.get(name).operateBook();
         else
             System.out.println("Book doesn't exist \n");
     }
 
     public void printDictionary() {
-        if (dictionary.size() == 0) {
+        if (mainDictionary.size() == 0) {
             System.out.println("No address book present");
             return;
         }
-        dictionary.entrySet().stream()
+        mainDictionary.entrySet().stream()
                 .filter(entry -> entry.getValue().book.size() != 0)
                 .forEach(entry -> System.out.println("~~~~~~~~~~~~~\n" + entry.getKey() + " -> \n" + entry.getValue()));
     }
@@ -54,7 +61,8 @@ public class AddressBookDictionary {
     public void searchMenu() {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            System.out.print("\nSearch menu -> \n(1)Search contact by name (2)Search contacts in a city (3)Search contacts in a state (0) Go back to main menu : ");
+            System.out.print("\nSearch menu -> \n(1)Search contact by name " +
+                    "(2)Search contacts in a city (3)Search contacts in a state (0) Go back to main menu : ");
             int choice = sc.nextInt();
             switch (choice) {
                 case SEARCH_CONTACT_BY_NAME -> searchContacts(NAME_INPUT);
@@ -72,7 +80,7 @@ public class AddressBookDictionary {
         String firstName = takeValidInput(FIRST_NAME_INPUT);
         String lastName = takeValidInput(LAST_NAME_INPUT);
         List<Contact> listOfContactsWithGivenName =
-                dictionary
+                mainDictionary
                         .entrySet()
                         .stream()
                         .flatMap(entry -> entry.getValue().book.stream())
@@ -86,17 +94,38 @@ public class AddressBookDictionary {
             listOfContactsWithGivenName
                     .forEach(System.out::println);
         } else if (type.equals(CITY_INPUT)) {
-            String placeName=takeValidInput(CITY_INPUT);
+            String placeName = takeValidInput(CITY_INPUT);
             listOfContactsWithGivenName
                     .stream()
                     .filter(contact -> contact.getCity().equals(placeName))
                     .forEach(System.out::println);
         } else {
-            String placeName=takeValidInput(STATE_INPUT);
+            String placeName = takeValidInput(STATE_INPUT);
             listOfContactsWithGivenName
                     .stream()
                     .filter(contact -> contact.getState().equals(placeName))
                     .forEach(System.out::println);
+        }
+    }
+
+    private void fillPlaceDictionary(String placeType) {
+        Stream<Contact> stream = mainDictionary
+                .entrySet()
+                .stream()
+                .flatMap(entry -> entry.getValue().book.stream());
+        if (placeType.equals(CITY_INPUT))
+            cityDictionary = stream.collect(Collectors.groupingBy(Contact::getCity));
+        else
+            stateDictionary=stream.collect(Collectors.groupingBy(Contact::getState));
+    }
+
+    public void printPlaceDictionary(String placeType) {
+        if (placeType.equals(CITY_INPUT)) {
+            fillPlaceDictionary(CITY_INPUT);
+            System.out.println(cityDictionary);
+        } else {
+            fillPlaceDictionary(STATE_INPUT);
+            System.out.println(stateDictionary);
         }
     }
 }

@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 
@@ -11,7 +10,8 @@ public class AddressBookMain {
         AddressBookDictionary addressBookDictionary = new AddressBookDictionary();
         while (true) {
             System.out.print("\nMain menu -> \n(1)Create new address book " +
-                    "(2)Choose an address book (3)Print dictionary (4)Search menu (0)Exit : ");
+                    "(2)Choose an address book (3)Print main dictionary (4)Search " +
+                    "(5)Print city dictionary (6)Print state dictionary (0)Exit : ");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -19,6 +19,8 @@ public class AddressBookMain {
                 case CHOOSE_ADDRESS_BOOK -> addressBookDictionary.chooseAddressBook();
                 case PRINT_DICTIONARY -> addressBookDictionary.printDictionary();
                 case SEARCH -> addressBookDictionary.searchMenu();
+                case PRINT_CITY_DICTIONARY -> addressBookDictionary.printPlaceDictionary(CITY_INPUT);
+                case PRINT_STATE_DICTIONARY -> addressBookDictionary.printPlaceDictionary(STATE_INPUT);
                 case EXIT -> {
                     return;
                 }
