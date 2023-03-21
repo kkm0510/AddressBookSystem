@@ -1,20 +1,14 @@
-import static constants.AddressBookConstants.*;
-
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static constants.AddressBookConstants.*;
+import static constants.AddressBookConstants.LAST_NAME_INPUT;
+
 public class AddressBook {
 
-    String bookName;
-    List<Contact> book;
-
-    public AddressBook(String bookName) {
-        this.bookName = bookName;
-        book = new LinkedList<>();
-    }
-
-    public void operateBook() {
+    public void operateBook(String bookName, List<Contact> book) {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.print("\n" + bookName + " -> \n(1)Add contacts (2)Edit contact " +
@@ -22,13 +16,13 @@ public class AddressBook {
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
-                case ADD_CONTACT -> addContacts();
-                case EDIT_CONTACT -> editContact();
-                case DELETE_CONTACT -> deleteContact();
-                case SEARCH -> searchContactInBook();
+                case ADD_CONTACT -> addContacts(book);
+                case EDIT_CONTACT -> editContact(book);
+                case DELETE_CONTACT -> deleteContact(book);
+                case SEARCH -> searchContactInBook(book);
                 case PRINT -> {
                     if (book.size() == 0) System.out.println("AddressBook is empty");
-                    else System.out.println(this);
+                    else System.out.println(book);
                 }
                 case EXIT -> {
                     return;
@@ -38,22 +32,22 @@ public class AddressBook {
         }
     }
 
-    private void addContacts() {
+    private void addContacts(List<Contact> book) {
         Scanner sc = new Scanner(System.in);
         System.out.print("\nHow many contacts do you want to add? ");
         int noOfContacts = sc.nextInt();
         int count = 0;
         while (count < noOfContacts) {
-            Contact person = new Contact();
-            int choice = takeInputInContact(person);
+            Contact contact = new Contact();
+            int choice = takeInputInContact(contact, book);
             if (choice == 1) continue;
             if (choice == 0) return;
-            book.add(person);
+            book.add(contact);
             count++;
         }
     }
 
-    private int takeInputInContact(Contact contact) {
+    private int takeInputInContact(Contact contact, List<Contact> book) {
         contact.setFirstName(takeValidInput(FIRST_NAME_INPUT));
         contact.setLastName(takeValidInput(LAST_NAME_INPUT));
         if (book.contains(contact)) {
@@ -84,7 +78,7 @@ public class AddressBook {
         return -1;
     }
 
-    private void editContact() {
+    private void editContact(List<Contact> book) {
         if (book.size() == 0) {
             System.out.println("AddressBook is empty");
             return;
@@ -135,26 +129,22 @@ public class AddressBook {
         }
     }
 
-    private void deleteContact() {
-        if (book.size() == 0) {
+    private void deleteContact(List<Contact> book) {
+        if (book.isEmpty()) {
             System.out.println("AddressBook is empty");
             return;
         }
         String firstName = takeValidInput(FIRST_NAME_INPUT);
         String lastName = takeValidInput(LAST_NAME_INPUT);
-        boolean exist = book.stream()
-                .anyMatch(contact -> contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName));
-        if (!exist) {
+        boolean removed = book.removeIf(contact -> contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName));
+        if (!removed) {
             System.out.println("Contact doesn't exist!!!");
             return;
         }
-        book = book.stream()
-                .filter(contact -> !contact.getFirstName().equals(firstName) && !contact.getLastName().equals(lastName))
-                .toList();
         System.out.println("Contact deleted");
     }
 
-    public void searchContactInBook() {
+    public void searchContactInBook(List<Contact> book) {
         String firstName = takeValidInput(FIRST_NAME_INPUT);
         String lastName = takeValidInput(LAST_NAME_INPUT);
         Contact contact = book.stream()
@@ -163,12 +153,5 @@ public class AddressBook {
                 .orElse(null);
         if (contact != null) System.out.println(contact);
         else System.out.println("Contact doesn't exist!!!");
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder();
-        book.forEach(contact -> str.append(contact).append("\n"));
-        return str.toString();
     }
 }

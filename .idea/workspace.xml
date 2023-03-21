@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43f655bd-1e2b-488e-84a4-6b3612d61d0f" name="Changes" comment="ADDED : code to view contacts by city and state">
+    <list default="true" id="43f655bd-1e2b-488e-84a4-6b3612d61d0f" name="Changes" comment="ADDED : code to count contacts by city and state">
+      <change afterPath="$PROJECT_DIR$/src/DictionaryEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AddressBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddressBook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AddressBookDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddressBookDictionary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AddressBookMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddressBookMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contact.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/constants/AddressBookConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/AddressBookConstants.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,6 +20,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -45,15 +47,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/DELL/OneDrive/Desktop/Assignments/AddressBookSystem&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/DELL/OneDrive/Desktop/Workshops/workshop1",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="AddressBookMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AddressBookMain" />
@@ -207,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679311864795</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="ADDED : code to count contacts by city and state">
+      <created>1679330878121</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1679330878121</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -229,6 +238,7 @@
     <MESSAGE value="REFACTORED : created a separate package for constants and imported it" />
     <MESSAGE value="REFACTORED : code to avoid duplicates and use streams" />
     <MESSAGE value="ADDED : code to view contacts by city and state" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADDED : code to view contacts by city and state" />
+    <MESSAGE value="ADDED : code to count contacts by city and state" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADDED : code to count contacts by city and state" />
   </component>
 </project>

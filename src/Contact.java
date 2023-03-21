@@ -66,7 +66,8 @@ public class Contact {
                 "\nState: " + state +
                 "\nPin: " + pin +
                 "\nPhone Number: " + phoneNumber +
-                "\nEmail: " + email;
+                "\nEmail: " + email +
+                "\n";
     }
 
     @Override

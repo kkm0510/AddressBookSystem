@@ -27,7 +27,6 @@ public class AddressBookConstants {
     public static final int PHONE_NUMBER = 7;
     public static final int EMAIL = 8;
 
-
     public static final String NAME_INPUT = "name";
     public static final String FIRST_NAME_INPUT = "first name";
     public static final String LAST_NAME_INPUT = "last name";
@@ -55,7 +54,6 @@ public class AddressBookConstants {
     public static final int PRINT_CITY_DICTIONARY=2;
     public static final int PRINT_STATE_DICTIONARY=3;
 
-//    public static final int COUNT_IN_MAIN_DICTIONARY=1;
     public static final int COUNT_IN_CITY_DICTIONARY=1;
     public static final int COUNT_IN_STATE_DICTIONARY=2;
 
