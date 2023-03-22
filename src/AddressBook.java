@@ -8,7 +8,7 @@ import static constants.AddressBookConstants.LAST_NAME_INPUT;
 
 public class AddressBook {
 
-    public void operateBook(String bookName, List<Contact> book) {
+    public static void operateBook(String bookName, List<Contact> book) {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.print("\n" + bookName + " -> \n(1)Add contacts (2)Edit contact " +
@@ -32,7 +32,7 @@ public class AddressBook {
         }
     }
 
-    private void addContacts(List<Contact> book) {
+    private static void addContacts(List<Contact> book) {
         Scanner sc = new Scanner(System.in);
         System.out.print("\nHow many contacts do you want to add? ");
         int noOfContacts = sc.nextInt();
@@ -47,7 +47,7 @@ public class AddressBook {
         }
     }
 
-    private int takeInputInContact(Contact contact, List<Contact> book) {
+    private static int takeInputInContact(Contact contact, List<Contact> book) {
         contact.setFirstName(takeValidInput(FIRST_NAME_INPUT));
         contact.setLastName(takeValidInput(LAST_NAME_INPUT));
         if (book.contains(contact)) {
@@ -78,7 +78,7 @@ public class AddressBook {
         return -1;
     }
 
-    private void editContact(List<Contact> book) {
+    private static void editContact(List<Contact> book) {
         if (book.size() == 0) {
             System.out.println("AddressBook is empty");
             return;
@@ -116,7 +116,7 @@ public class AddressBook {
         System.out.println(contact);
     }
 
-    private String validInputToEdit() {
+    private static String validInputToEdit() {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.print("\nWhat all do you want to edit? \n(1)First name (2)Last name" +
@@ -129,7 +129,7 @@ public class AddressBook {
         }
     }
 
-    private void deleteContact(List<Contact> book) {
+    private static void deleteContact(List<Contact> book) {
         if (book.isEmpty()) {
             System.out.println("AddressBook is empty");
             return;
@@ -144,7 +144,7 @@ public class AddressBook {
         System.out.println("Contact deleted");
     }
 
-    public void searchContactInBook(List<Contact> book) {
+    private static void searchContactInBook(List<Contact> book) {
         String firstName = takeValidInput(FIRST_NAME_INPUT);
         String lastName = takeValidInput(LAST_NAME_INPUT);
         Contact contact = book.stream()
