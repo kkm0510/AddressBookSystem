@@ -1,6 +1,4 @@
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,7 +26,7 @@ public class AddressBookDictionary {
         }
         List<Contact> addressBook = new LinkedList<>();
         mainDictionary.put(name, addressBook);
-        AddressBook.operateBook(name, addressBook);
+        new AddressBook().operateBook(name, addressBook);
     }
 
     //check 1
@@ -43,7 +41,7 @@ public class AddressBookDictionary {
         System.out.print("Choose address book : ");
         String name = sc.nextLine();
         if (mainDictionary.containsKey(name))
-            AddressBook.operateBook(name, mainDictionary.get(name));
+            new AddressBook().operateBook(name, mainDictionary.get(name));
         else
             System.out.println("Book doesn't exist \n");
     }
