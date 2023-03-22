@@ -1,10 +1,11 @@
+package addressbook;
+
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import static constants.AddressBookConstants.*;
-import static constants.AddressBookConstants.LAST_NAME_INPUT;
+import static addressbook.InputEnum.*;
+import static addressbook.Util.*;
+
 
 public class AddressBook {
 
@@ -48,8 +49,8 @@ public class AddressBook {
     }
 
     private int takeInputInContact(Contact contact, List<Contact> book) {
-        contact.setFirstName(takeValidInput(FIRST_NAME_INPUT));
-        contact.setLastName(takeValidInput(LAST_NAME_INPUT));
+        contact.setFirstName(takeValidInput(FIRST_NAME));
+        contact.setLastName(takeValidInput(LAST_NAME));
         if (book.contains(contact)) {
             System.out.println("Contact already exists!!!");
             System.out.println();
@@ -68,12 +69,12 @@ public class AddressBook {
             }
             System.out.println();
         }
-        contact.setAddress(takeValidInput(ADDRESS_INPUT));
-        contact.setCity(takeValidInput(CITY_INPUT));
-        contact.setState(takeValidInput(STATE_INPUT));
-        contact.setPin(takeValidInput(PIN_INPUT));
-        contact.setPhoneNumber(takeValidInput(PHONE_NUMBER_INPUT));
-        contact.setEmail(takeValidInput(EMAIL_INPUT));
+        contact.setAddress(takeValidInput(ADDRESS));
+        contact.setCity(takeValidInput(CITY));
+        contact.setState(takeValidInput(STATE));
+        contact.setPin(takeValidInput(PIN));
+        contact.setPhoneNumber(takeValidInput(PHONE_NUMBER));
+        contact.setEmail(takeValidInput(EMAIL));
         System.out.println();
         return -1;
     }
@@ -83,32 +84,30 @@ public class AddressBook {
             System.out.println("AddressBook is empty");
             return;
         }
-        String firstName = takeValidInput(FIRST_NAME_INPUT);
-        String lastName = takeValidInput(LAST_NAME_INPUT);
+        String firstName = takeValidInput(FIRST_NAME);
+        String lastName = takeValidInput(LAST_NAME);
         Contact contact = book.stream()
-                .filter(c -> c.getFirstName().equals(firstName) && c.getLastName().equals(lastName))
+                .filter(matchingName(firstName, lastName))
                 .findAny()
                 .orElse(null);
         if (contact == null) {
             System.out.println("Contact doesn't exist!!!");
             return;
         }
-        String toEdit = validInputToEdit();
+        String toEdit = takeValidInput(EDIT).replaceAll("\\s", "");
         for (int i = 0; i < toEdit.length(); i++) {
-            if (toEdit.charAt(i) == ' ') continue;
             int choice = toEdit.charAt(i) - 48;
-            switch (choice) {
-                case FIRST_NAME -> contact.setFirstName(takeValidInput(FIRST_NAME_INPUT));
-                case LAST_NAME -> contact.setLastName(takeValidInput(LAST_NAME_INPUT));
-                case ADDRESS -> contact.setAddress(takeValidInput(ADDRESS_INPUT));
-                case CITY -> contact.setCity(takeValidInput(CITY_INPUT));
-                case STATE -> contact.setState(takeValidInput(STATE_INPUT));
-                case PIN -> contact.setPin(takeValidInput(PIN_INPUT));
-                case PHONE_NUMBER -> contact.setPhoneNumber(takeValidInput(PHONE_NUMBER_INPUT));
-                case EMAIL -> contact.setEmail(takeValidInput(EMAIL_INPUT));
-                case EXIT -> {
-                    return;
-                }
+            if(choice==0) return;
+            InputEnum input=InputEnum.values()[choice-1];
+            switch (input) {
+                case FIRST_NAME -> contact.setFirstName(takeValidInput(FIRST_NAME));
+                case LAST_NAME -> contact.setLastName(takeValidInput(LAST_NAME));
+                case ADDRESS -> contact.setAddress(takeValidInput(ADDRESS));
+                case CITY -> contact.setCity(takeValidInput(CITY));
+                case STATE -> contact.setState(takeValidInput(STATE));
+                case PIN -> contact.setPin(takeValidInput(PIN));
+                case PHONE_NUMBER -> contact.setPhoneNumber(takeValidInput(PHONE_NUMBER));
+                case EMAIL -> contact.setEmail(takeValidInput(EMAIL));
                 default -> System.out.println("Wrong input");
             }
         }
@@ -116,27 +115,14 @@ public class AddressBook {
         System.out.println(contact);
     }
 
-    private String validInputToEdit() {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.print("\nWhat all do you want to edit? \n(1)First name (2)Last name" +
-                    " (3)Address (4)City (5)State (6)Pin (7)Phone number (8)Email -> ");
-            String toEdit = sc.nextLine();
-            Pattern p = Pattern.compile(VALID_EDIT);
-            Matcher m = p.matcher(toEdit);
-            if (m.matches()) return toEdit;
-            else System.out.println("Illegal Input!!!");
-        }
-    }
-
     private void deleteContact(List<Contact> book) {
         if (book.isEmpty()) {
             System.out.println("AddressBook is empty");
             return;
         }
-        String firstName = takeValidInput(FIRST_NAME_INPUT);
-        String lastName = takeValidInput(LAST_NAME_INPUT);
-        boolean removed = book.removeIf(contact -> contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName));
+        String firstName = takeValidInput(FIRST_NAME);
+        String lastName = takeValidInput(LAST_NAME);
+        boolean removed = book.removeIf(matchingName(firstName, lastName));
         if (!removed) {
             System.out.println("Contact doesn't exist!!!");
             return;
@@ -145,10 +131,10 @@ public class AddressBook {
     }
 
     private void searchContactInBook(List<Contact> book) {
-        String firstName = takeValidInput(FIRST_NAME_INPUT);
-        String lastName = takeValidInput(LAST_NAME_INPUT);
+        String firstName = takeValidInput(FIRST_NAME);
+        String lastName = takeValidInput(LAST_NAME);
         Contact contact = book.stream()
-                .filter(c -> c.getFirstName().equals(firstName) && c.getLastName().equals(lastName))
+                .filter(matchingName(firstName, lastName))
                 .findAny()
                 .orElse(null);
         if (contact != null) System.out.println(contact);

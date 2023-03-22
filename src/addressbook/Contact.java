@@ -1,4 +1,6 @@
-public class Contact {
+package addressbook;
+
+public class Contact implements Comparable<Contact> {
 
     private String firstName;
     private String lastName;
@@ -27,6 +29,10 @@ public class Contact {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getPin() {
+        return pin;
     }
 
     public void setCity(String city) {
@@ -81,5 +87,10 @@ public class Contact {
         if (obj == null || obj.getClass() != this.getClass()) return false;
         Contact c = (Contact) obj;
         return (this.firstName + this.lastName).equals(c.firstName + (c.lastName));
+    }
+
+    @Override
+    public int compareTo(Contact o) {
+        return (this.firstName+this.lastName).compareTo(o.firstName+o.lastName);
     }
 }
