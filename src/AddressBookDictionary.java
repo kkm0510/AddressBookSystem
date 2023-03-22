@@ -7,11 +7,9 @@ import static constants.AddressBookConstants.takeValidInput;
 
 public class AddressBookDictionary {
 
-    AddressBook book;
     Map<String, List<Contact>> mainDictionary;
 
     public AddressBookDictionary() {
-        book=new AddressBook();
         mainDictionary = new HashMap<>();
     }
 
