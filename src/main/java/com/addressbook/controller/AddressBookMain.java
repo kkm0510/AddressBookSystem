@@ -1,8 +1,11 @@
 package com.addressbook.controller;
 
 import static com.addressbook.util.Util.*;
+
+import com.addressbook.exceptions.AddressBookException;
 import com.addressbook.service.AddressBookDictionary;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AddressBookMain {
@@ -11,24 +14,29 @@ public class AddressBookMain {
         Scanner sc = new Scanner(System.in);
         AddressBookDictionary addressBookDictionary = new AddressBookDictionary();
         while (true) {
-            System.out.print("\nMain menu -> \n(1)Create new address book " +
-                    "(2)Choose an address book (3)Print (4)Search (5)Count (6)Sort " +
-                    "(7)Read data From CSV (8)Write data to CSV (0)Exit : ");
-            int choice =  sc.nextInt();
-            sc.nextLine();
-            switch (choice) {
-                case CREATE_ADDRESS_BOOK -> addressBookDictionary.createAddressBook();
-                case CHOOSE_ADDRESS_BOOK -> addressBookDictionary.chooseAddressBook();
-                case PRINT -> addressBookDictionary.printMenu();
-                case SEARCH -> addressBookDictionary.searchMenu();
-                case COUNT -> addressBookDictionary.count();
-                case SORT -> addressBookDictionary.sort();
-                case READ_CSV -> addressBookDictionary.readCSVData();
-                case WRITE_CSV -> addressBookDictionary.writeDataToCSV();
-                case EXIT -> {
-                    return;
+            try {
+                System.out.print("\nMain menu -> \n(1)Create new address book (2)Choose an address book " +
+                        "(3)File Input/Output (4)Print (5)Search (6)Count (7)Sort (0)Exit : ");
+                int choice = sc.nextInt();
+                sc.nextLine();
+                switch (choice) {
+                    case CREATE_ADDRESS_BOOK -> addressBookDictionary.createAddressBook();
+                    case CHOOSE_ADDRESS_BOOK -> addressBookDictionary.chooseAddressBook();
+                    case FILE_IO -> addressBookDictionary.fileIO();
+                    case PRINT -> addressBookDictionary.printMenu();
+                    case SEARCH -> addressBookDictionary.searchMenu();
+                    case COUNT -> addressBookDictionary.count();
+                    case SORT -> addressBookDictionary.sort();
+                    case EXIT -> {
+                        return;
+                    }
+                    default -> throw new AddressBookException("Invalid Input!!!");
                 }
-                default -> System.out.println("Wrong input!!!");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid Input!!!");
+                sc.nextLine();
+            } catch (AddressBookException e) {
+                System.out.println(e.getMessage());
             }
         }
     }

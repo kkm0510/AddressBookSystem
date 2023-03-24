@@ -1,0 +1,44 @@
+#Features ->
+
+* Contact Name :- no special characters, numerals, etc. allowed.
+
+* Contact Phone Number :- can only be 10 digit and no special characters or alphabets allowed.
+
+* Contact Pin :- only 6 digit pin allowed without any special characters and alphabets.
+
+* Global search :- a contact can be searched globally i.e. in the dictionary via phone number or via name
+                    and will print the details along with the name of the address book it is located in.
+                    Prints all contacts with same names or numbers as per input.
+
+* Searching can be done both on a particular address book and on the entire dictionary.
+
+* User can add as many contacts as he wants in one go.
+
+** User can choose to edit multiple details of a contact in one go.
+
+* If data is not available for any menu option, it is taken care of.
+
+* Empty address book is not printed while printing the dictionary
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#Issues to address ->
+
+*Input mismatch exception in switch cases if user inputs a string instead of an integer for choice.
+
+*handle all exceptions
+
+*should exit at any point just by pressing 0, should cancel any input process
+
+
+
+
+march21
+while choosing address book one should be able to exit
+one should be able to exit from any moment any time and go back to previous menu
+
+**add custom exceptions and handle input mismatch exceptions
+
+
+**rename zip to pin everywhere
+

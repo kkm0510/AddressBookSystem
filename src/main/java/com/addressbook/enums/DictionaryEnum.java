@@ -1,6 +1,5 @@
 package com.addressbook.enums;
 
-
 import com.addressbook.model.Contact;
 
 import java.util.List;

@@ -1,14 +1,34 @@
 package com.addressbook.model;
 
+import com.opencsv.bean.CsvBindByPosition;
+
 public class Contact implements Comparable<Contact> {
 
+    @CsvBindByPosition(position = 0)
+    private String bookName;
+
+    @CsvBindByPosition(position = 1)
     private String firstName;
+
+    @CsvBindByPosition(position = 2)
     private String lastName;
+
+    @CsvBindByPosition(position = 3)
     private String address;
+
+    @CsvBindByPosition(position = 4)
     private String city;
+
+    @CsvBindByPosition(position = 5)
     private String state;
+
+    @CsvBindByPosition(position = 6)
     private String pin;
+
+    @CsvBindByPosition(position = 7)
     private String phoneNumber;
+
+    @CsvBindByPosition(position = 8)
     private String email;
 
     public String getFirstName() {
@@ -75,6 +95,14 @@ public class Contact implements Comparable<Contact> {
         this.email = email;
     }
 
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
     @Override
     public String toString() {
         return "\nFirst Name: " + firstName +
@@ -103,7 +131,7 @@ public class Contact implements Comparable<Contact> {
 
     @Override
     public int compareTo(Contact o) {
-        return (this.firstName+this.lastName).compareTo(o.firstName+o.lastName);
+        return (this.firstName + this.lastName).compareTo(o.firstName + o.lastName);
     }
 
 }
