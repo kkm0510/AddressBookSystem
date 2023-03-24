@@ -4,16 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43f655bd-1e2b-488e-84a4-6b3612d61d0f" name="Changes" comment="REMOVED : address book object instance variable">
-      <change afterPath="$PROJECT_DIR$/src/addressbook/InputEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/addressbook/SortEnum.java" afterDir="false" />
+    <list default="true" id="43f655bd-1e2b-488e-84a4-6b3612d61d0f" name="Changes" comment="ADDED : code to sort contacts by name">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_opencsv_opencsv_5_7_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_12_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_text_1_10_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/enums/DictionaryEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/enums/InputEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/csvoperations/AddressBookCSV.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/csvoperations/ReadData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/csvoperations/WriteData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AddressBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/addressbook/AddressBook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AddressBookDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/addressbook/AddressBookDictionary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AddressBookMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/addressbook/AddressBookMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/addressbook/Contact.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DictionaryEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/addressbook/DictionaryEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/AddressBookConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/addressbook/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AddressBookSystem.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AddressBookSystem.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/addressbook/AddressBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/service/AddressBook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/addressbook/AddressBookDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/service/AddressBookDictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/addressbook/AddressBookMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/controller/AddressBookMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/addressbook/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/model/Contact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/addressbook/DictionaryEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/addressbook/InputEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/addressbook/SortEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/enums/SortEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/addressbook/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/util/Util.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +43,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -55,21 +75,43 @@
     "Git.Branch.Popup.ShowAllRemotes": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_opened_file_path": "C:/Users/DELL/OneDrive/Desktop/Main Project/AddressBook-Trial",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.23144531",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\DELL\OneDrive\Desktop\Assignments\AddressBookSystem\src\main\resources\input" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.com.addressbook.controller.AddressBookMain">
     <configuration name="AddressBookMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="addressbook.AddressBookMain" />
+      <option name="MAIN_CLASS_NAME" value="controller.AddressBookMain" />
       <module name="AddressBookSystem" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.addressbook.controller.AddressBookMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.addressbook.controller.AddressBookMain" />
+      <module name="AddressBookSystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.addressbook.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.AddressBookMain" />
+        <item itemvalue="Application.com.addressbook.controller.AddressBookMain" />
         <item itemvalue="Application.AddressBookMain" />
         <item itemvalue="Application.AddressBookMain" />
         <item itemvalue="Application.AddressBookMain" />
@@ -226,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679452031580</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="ADDED : code to sort contacts by name">
+      <created>1679491920110</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1679491920110</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -250,6 +299,7 @@
     <MESSAGE value="ADDED : code to view contacts by city and state" />
     <MESSAGE value="ADDED : code to count contacts by city and state" />
     <MESSAGE value="REFACTORED : made address book methods static" />
-    <option name="LAST_COMMIT_MESSAGE" value="REFACTORED : made address book methods static" />
+    <MESSAGE value="ADDED : code to sort contacts by name" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADDED : code to sort contacts by name" />
   </component>
 </project>

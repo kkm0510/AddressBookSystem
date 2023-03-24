@@ -1,6 +1,7 @@
-package addressbook;
+package com.addressbook.enums;
 
-import addressbook.Contact;
+
+import com.addressbook.model.Contact;
 
 import java.util.Comparator;
 import java.util.stream.Stream;
@@ -35,5 +36,5 @@ public enum SortEnum {
         }
     };
 
-    abstract Stream<Contact> getSortedContacts(Stream<Contact> stream);
+    public abstract Stream<Contact> getSortedContacts(Stream<Contact> stream);
 }

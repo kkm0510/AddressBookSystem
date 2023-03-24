@@ -1,4 +1,4 @@
-package addressbook;
+package com.addressbook.model;
 
 public class Contact implements Comparable<Contact> {
 
@@ -37,6 +37,18 @@ public class Contact implements Comparable<Contact> {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getCity() {
@@ -93,4 +105,5 @@ public class Contact implements Comparable<Contact> {
     public int compareTo(Contact o) {
         return (this.firstName+this.lastName).compareTo(o.firstName+o.lastName);
     }
+
 }

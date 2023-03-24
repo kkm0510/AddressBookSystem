@@ -1,11 +1,11 @@
-package addressbook;
+package com.addressbook.service;
+
+import com.addressbook.enums.InputEnum;
+import com.addressbook.model.Contact;
+import static com.addressbook.util.Util.*;
 
 import java.util.List;
 import java.util.Scanner;
-
-import static addressbook.InputEnum.*;
-import static addressbook.Util.*;
-
 
 public class AddressBook {
 
@@ -49,8 +49,8 @@ public class AddressBook {
     }
 
     private int takeInputInContact(Contact contact, List<Contact> book) {
-        contact.setFirstName(takeValidInput(FIRST_NAME));
-        contact.setLastName(takeValidInput(LAST_NAME));
+        contact.setFirstName(takeValidInput(InputEnum.FIRST_NAME));
+        contact.setLastName(takeValidInput(InputEnum.LAST_NAME));
         if (book.contains(contact)) {
             System.out.println("Contact already exists!!!");
             System.out.println();
@@ -69,12 +69,12 @@ public class AddressBook {
             }
             System.out.println();
         }
-        contact.setAddress(takeValidInput(ADDRESS));
-        contact.setCity(takeValidInput(CITY));
-        contact.setState(takeValidInput(STATE));
-        contact.setPin(takeValidInput(PIN));
-        contact.setPhoneNumber(takeValidInput(PHONE_NUMBER));
-        contact.setEmail(takeValidInput(EMAIL));
+        contact.setAddress(takeValidInput(InputEnum.ADDRESS));
+        contact.setCity(takeValidInput(InputEnum.CITY));
+        contact.setState(takeValidInput(InputEnum.STATE));
+        contact.setPin(takeValidInput(InputEnum.PIN));
+        contact.setPhoneNumber(takeValidInput(InputEnum.PHONE_NUMBER));
+        contact.setEmail(takeValidInput(InputEnum.EMAIL));
         System.out.println();
         return -1;
     }
@@ -84,8 +84,8 @@ public class AddressBook {
             System.out.println("AddressBook is empty");
             return;
         }
-        String firstName = takeValidInput(FIRST_NAME);
-        String lastName = takeValidInput(LAST_NAME);
+        String firstName = takeValidInput(InputEnum.FIRST_NAME);
+        String lastName = takeValidInput(InputEnum.LAST_NAME);
         Contact contact = book.stream()
                 .filter(matchingName(firstName, lastName))
                 .findAny()
@@ -94,20 +94,20 @@ public class AddressBook {
             System.out.println("Contact doesn't exist!!!");
             return;
         }
-        String toEdit = takeValidInput(EDIT).replaceAll("\\s", "");
+        String toEdit = takeValidInput(InputEnum.EDIT).replaceAll("\\s", "");
         for (int i = 0; i < toEdit.length(); i++) {
             int choice = toEdit.charAt(i) - 48;
             if(choice==0) return;
             InputEnum input=InputEnum.values()[choice-1];
             switch (input) {
-                case FIRST_NAME -> contact.setFirstName(takeValidInput(FIRST_NAME));
-                case LAST_NAME -> contact.setLastName(takeValidInput(LAST_NAME));
-                case ADDRESS -> contact.setAddress(takeValidInput(ADDRESS));
-                case CITY -> contact.setCity(takeValidInput(CITY));
-                case STATE -> contact.setState(takeValidInput(STATE));
-                case PIN -> contact.setPin(takeValidInput(PIN));
-                case PHONE_NUMBER -> contact.setPhoneNumber(takeValidInput(PHONE_NUMBER));
-                case EMAIL -> contact.setEmail(takeValidInput(EMAIL));
+                case FIRST_NAME -> contact.setFirstName(takeValidInput(InputEnum.FIRST_NAME));
+                case LAST_NAME -> contact.setLastName(takeValidInput(InputEnum.LAST_NAME));
+                case ADDRESS -> contact.setAddress(takeValidInput(InputEnum.ADDRESS));
+                case CITY -> contact.setCity(takeValidInput(InputEnum.CITY));
+                case STATE -> contact.setState(takeValidInput(InputEnum.STATE));
+                case PIN -> contact.setPin(takeValidInput(InputEnum.PIN));
+                case PHONE_NUMBER -> contact.setPhoneNumber(takeValidInput(InputEnum.PHONE_NUMBER));
+                case EMAIL -> contact.setEmail(takeValidInput(InputEnum.EMAIL));
                 default -> System.out.println("Wrong input");
             }
         }
@@ -120,8 +120,8 @@ public class AddressBook {
             System.out.println("AddressBook is empty");
             return;
         }
-        String firstName = takeValidInput(FIRST_NAME);
-        String lastName = takeValidInput(LAST_NAME);
+        String firstName = takeValidInput(InputEnum.FIRST_NAME);
+        String lastName = takeValidInput(InputEnum.LAST_NAME);
         boolean removed = book.removeIf(matchingName(firstName, lastName));
         if (!removed) {
             System.out.println("Contact doesn't exist!!!");
@@ -131,8 +131,8 @@ public class AddressBook {
     }
 
     private void searchContactInBook(List<Contact> book) {
-        String firstName = takeValidInput(FIRST_NAME);
-        String lastName = takeValidInput(LAST_NAME);
+        String firstName = takeValidInput(InputEnum.FIRST_NAME);
+        String lastName = takeValidInput(InputEnum.LAST_NAME);
         Contact contact = book.stream()
                 .filter(matchingName(firstName, lastName))
                 .findAny()

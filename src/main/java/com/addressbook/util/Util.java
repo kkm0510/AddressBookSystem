@@ -1,9 +1,11 @@
-package addressbook;
+package com.addressbook.util;
+
+import com.addressbook.model.Contact;
+import com.addressbook.enums.InputEnum;
 
 import java.util.Scanner;
 
 import java.util.function.Predicate;
-import java.util.regex.Pattern;
 
 public class Util {
 
@@ -13,6 +15,8 @@ public class Util {
     public static final int SEARCH = 4;
     public static final int COUNT=5;
     public static final int SORT=6;
+    public static final int READ_CSV = 7;
+    public static final int WRITE_CSV = 8;
     public static final int EXIT = 0;
 
     public static final int ADD_CONTACT = 1;
@@ -27,17 +31,13 @@ public class Util {
     public static final int PRINT_MAIN_DICTIONARY=1;
     public static final int PRINT_CITY_DICTIONARY=2;
     public static final int PRINT_STATE_DICTIONARY=3;
-
-    public static final int COUNT_IN_CITY_DICTIONARY=1;
-    public static final int COUNT_IN_STATE_DICTIONARY=2;
-
-
+;
     public static String takeValidInput(InputEnum type) {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.print("Enter " + type.getValue() + " : ");
             String input = sc.nextLine();
-            if (Pattern.compile(type.getRegex()).matcher(input).matches()) return input;
+            if (input.matches(type.getRegex())) return input;
             else System.out.println("Illegal Input!!!");
         }
     }
