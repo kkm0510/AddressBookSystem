@@ -16,7 +16,6 @@ import com.addressbook.fileio.JSONOperations;
 import com.addressbook.models.Contact;
 import com.addressbook.models.InvalidContact;
 
-import static com.addressbook.fileio.CSVOperations.writeListOfInvalidContact;
 import static com.addressbook.util.Util.*;
 
 import java.util.*;
@@ -145,7 +144,7 @@ public class AddressBookDictionary {
                 sc.nextLine();
                 if (choice == 0) return;
                 WhereToPrintEnum.values()[choice - 1].printDictionary(dictionary);
-            } catch (InputMismatchException e) {
+            } catch (Exception e) {
                 System.out.println("Invalid Input!!!");
                 sc.nextLine();
             }
@@ -164,15 +163,14 @@ public class AddressBookDictionary {
                 choice = sc.nextInt();
                 sc.nextLine();
                 if (choice == 0) return;
-                if (choice > 2)
-                    throw new AddressBookException("Invalid Input!!!");
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid Input!!!");
-                sc.nextLine();
+                if (choice > 2) throw new AddressBookException("Invalid Input!!!");
+                whereToPrintCountDictionary(DictionaryEnum.values()[choice - 1].getCountDictionary(getContactsStream()));
             } catch (AddressBookException e) {
                 System.out.println(e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Invalid Input!!!");
+                sc.nextLine();
             }
-            whereToPrintCountDictionary(DictionaryEnum.values()[choice - 1].getCountDictionary(getContactsStream()));
         }
     }
 
@@ -185,7 +183,7 @@ public class AddressBookDictionary {
                 sc.nextLine();
                 if (choice == 0) return;
                 WhereToPrintEnum.values()[choice - 1].printCountDictionary(dictionary);
-            } catch (InputMismatchException e) {
+            } catch (Exception e) {
                 System.out.println("Invalid Input!!!");
                 sc.nextLine();
             }
@@ -209,17 +207,17 @@ public class AddressBookDictionary {
             int choice = 0;
             try {
                 choice = sc.nextInt();
-                if (choice == EXIT) return;
-                if (choice > 4)
-                    throw new AddressBookException("Invalid Input!!!");
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid Input!!!");
                 sc.nextLine();
+                if (choice == EXIT) return;
+                if (choice > 4) throw new AddressBookException("Invalid Input!!!");
+                Stream<Contact> sortedStream = SortEnum.values()[choice - 1].getSortedContacts(getContactsStream());
+                whereToPrintContactsList(sortedStream.toList());
             } catch (AddressBookException e) {
                 System.out.println(e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Invalid Input!!!");
+                sc.nextLine();
             }
-            Stream<Contact> sortedStream = SortEnum.values()[choice - 1].getSortedContacts(getContactsStream());
-            whereToPrintContactsList(sortedStream.toList());
         }
     }
 
@@ -270,7 +268,7 @@ public class AddressBookDictionary {
             whereToWriteInvalidContacts(list);
     }
 
-    public void whereToWriteInvalidContacts(List<InvalidContact> list)  {
+    public void whereToWriteInvalidContacts(List<InvalidContact> list) {
         Scanner sc = new Scanner(System.in);
         while (true) {
             try {
@@ -279,16 +277,16 @@ public class AddressBookDictionary {
                 if (choice == 0) return;
                 sc.nextLine();
                 switch (WhereToPrintEnum.values()[choice]) {
-                    case CSV -> CSVOperations.writeListOfInvalidContact(list);
-                    case JSON -> JSONOperations.writeListOfInvalidContact(list);
+                    case CSV -> new CSVOperations().writeListOfInvalidContact(list);
+                    case JSON -> new JSONOperations().writeListOfInvalidContact(list);
                     default -> throw new AddressBookException("Invalid Input!!!");
                 }
                 System.out.println("Process completed");
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid Input!!!");
-                sc.nextLine();
             } catch (AddressBookException e) {
                 System.out.println(e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Invalid Input!!!");
+                sc.nextLine();
             }
         }
     }

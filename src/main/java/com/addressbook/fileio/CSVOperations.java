@@ -18,7 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class CSVOperations {
+public class CSVOperations implements ABFileOperations{
 
     public static final String INPUT_PATH = "src/main/resources/input/ABDataIn.csv";
     public static final String OUTPUT_PATH = "output/ABDataOut.csv";
@@ -27,13 +27,14 @@ public class CSVOperations {
     private final List<InvalidContact> INVALID_DATA_LIST;
 
     public CSVOperations() {
-        INVALID_DATA_LIST = new LinkedList<>();
+        this.INVALID_DATA_LIST = new LinkedList<>();
     }
 
     public List<InvalidContact> getInvalidDataList() {
         return INVALID_DATA_LIST;
     }
 
+    @Override
     public List<Contact> getListOfData() {
         Reader reader = null;
         try {
@@ -61,6 +62,7 @@ public class CSVOperations {
         return checkedList;
     }
 
+    @Override
     public Map<String, List<Contact>> readDictionary() {
         List<Contact> listOfContact;
         try {
@@ -90,7 +92,8 @@ public class CSVOperations {
         return dictionary;
     }
 
-    private boolean isValidContact(Contact contact) {
+    @Override
+    public boolean isValidContact(Contact contact) {
         if (!contact.getFirstName().matches(FIRST_NAME.getRegex())) {
             return false;
         }
@@ -112,10 +115,7 @@ public class CSVOperations {
         if (!contact.getPhoneNumber().matches(PHONE_NUMBER.getRegex())) {
             return false;
         }
-        if (!contact.getEmail().matches(EMAIL.getRegex())) {
-            return false;
-        }
-        return true;
+        return contact.getEmail().matches(EMAIL.getRegex());
     }
 
     private Contact getHeaderObject() {
@@ -132,12 +132,14 @@ public class CSVOperations {
         return c;
     }
 
+    @Override
     public void writeDictionary(Map<String, List<Contact>> map) {
         List<Contact> list = new LinkedList<>();
         map.forEach((key, value) -> list.addAll(value));
         writeListOfContact(list);
     }
 
+    @Override
     public void writeCountDictionary(Map<String, Long> map) {
         try {
             Writer writer = new FileWriter(OUTPUT_PATH);
@@ -155,6 +157,7 @@ public class CSVOperations {
         }
     }
 
+    @Override
     public void writeListOfContact(List<Contact> contactList) {
         try {
             Writer writer = new FileWriter(OUTPUT_PATH);
@@ -168,7 +171,8 @@ public class CSVOperations {
         }
     }
 
-    public static void writeListOfInvalidContact(List<InvalidContact> invalidContactList) {
+    @Override
+    public void writeListOfInvalidContact(List<InvalidContact> invalidContactList) {
         try {
             Writer writer = new FileWriter(INVALID_DATA_PATH);
             StatefulBeanToCsvBuilder<InvalidContact> builder = new StatefulBeanToCsvBuilder<>(writer);

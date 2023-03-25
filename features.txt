@@ -4,7 +4,7 @@
 
 * Repeated names in same book are skipped while reading data from console/csv/json.
 
-* All invalid data is collected and feature to store it in a separate file is provided.
+* All invalid data along with reason for being invalid is collected and feature to store it in a separate file is provided.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #Issues resolved ->
