@@ -2,7 +2,7 @@ package com.addressbook.service;
 
 import static com.addressbook.enums.InputEnum.*;
 import com.addressbook.exceptions.AddressBookException;
-import com.addressbook.model.Contact;
+import com.addressbook.models.Contact;
 import com.addressbook.enums.InputEnum;
 
 import static com.addressbook.util.Util.*;
@@ -26,7 +26,7 @@ public class AddressBook {
                     case EDIT_CONTACT -> editContact(book);
                     case DELETE_CONTACT -> deleteContact(book);
                     case SEARCH -> searchContactInBook(book);
-                    case PRINT -> whereToPrintContactsStream(book.stream());
+                    case PRINT -> whereToPrintContactsList(book);
                     case EXIT -> {
                         return;
                     }

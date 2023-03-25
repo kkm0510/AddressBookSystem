@@ -4,9 +4,9 @@ public enum InputEnum {
 
     FIRST_NAME("first name", "^[A-Z][a-z]{2,}$"),
     LAST_NAME("last name", FIRST_NAME.regex),
-    ADDRESS("address", "^[a-zA-Z0-9 -]{8,}$"),
+    ADDRESS("address", "^[a-zA-Z0-9,-]{3,}([ ]?[a-zA-Z0-9,-]*)*$"),
     CITY("city", FIRST_NAME.regex),
-    STATE("state", "^[A-Z][a-z]{2,}([ ][A-Z][a-z]{2,}){0,}$"),
+    STATE("state", "^[A-Z][a-z]{2,}([ ][A-Z][a-z]{2,})*$"),
     PIN("pin", "^[0-9]{6}$"),
     PHONE_NUMBER("phone number", "^[6-9][0-9]{9}$"),
     EMAIL("email id", "^[a-zA-Z0-9]+[._+-]?[a-zA-Z0-9]+@[a-zA-Z0-9]+[.]+[a-z]{2,4}[.]?[a-z]{0,3}$"),

@@ -1,6 +1,6 @@
 package com.addressbook.enums;
 
-import com.addressbook.model.Contact;
+import com.addressbook.models.Contact;
 
 import java.util.List;
 import java.util.Map;

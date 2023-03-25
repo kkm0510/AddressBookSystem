@@ -2,11 +2,10 @@ package com.addressbook.enums;
 
 import com.addressbook.fileio.CSVOperations;
 import com.addressbook.fileio.JSONOperations;
-import com.addressbook.model.Contact;
+import com.addressbook.models.Contact;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 public enum WhereToPrintEnum {
 
@@ -25,8 +24,8 @@ public enum WhereToPrintEnum {
         }
 
         @Override
-        public void printContactStream(Stream<Contact> stream) {
-            stream.forEach(System.out::println);
+        public void printContactList(List<Contact> list) {
+            list.forEach(System.out::println);
         }
     },
 
@@ -47,9 +46,9 @@ public enum WhereToPrintEnum {
         }
 
         @Override
-        public void printContactStream(Stream<Contact> stream) {
+        public void printContactList(List<Contact> list) {
             CSVOperations csv=new CSVOperations();
-            csv.writeStreamOfContact(stream);
+            csv.writeListOfContact(list);
             System.out.println("Data written successfully");
         }
     },
@@ -71,9 +70,9 @@ public enum WhereToPrintEnum {
         }
 
         @Override
-        public void printContactStream(Stream<Contact> stream) {
+        public void printContactList(List<Contact> list) {
             JSONOperations json=new JSONOperations();
-            json.writeStreamOfContact(stream);
+            json.writeListOfContact(list);
             System.out.println("Data written successfully");
         }
     };
@@ -82,6 +81,6 @@ public enum WhereToPrintEnum {
 
     public abstract void printCountDictionary(Map<String, Long> dictionary);
 
-    public abstract void printContactStream(Stream<Contact> stream);
+    public abstract void printContactList(List<Contact> list);
 
 }

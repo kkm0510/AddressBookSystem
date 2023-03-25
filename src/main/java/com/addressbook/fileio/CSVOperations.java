@@ -1,14 +1,14 @@
 package com.addressbook.fileio;
 
-import com.addressbook.model.Contact;
-import com.opencsv.CSVWriter;
-import com.opencsv.ICSVWriter;
+import static com.addressbook.enums.InputEnum.*;
+
+import com.addressbook.models.Contact;
+import com.addressbook.models.InvalidContact;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,35 +17,70 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class CSVOperations {
 
     public static final String INPUT_PATH = "src/main/resources/input/ABDataIn.csv";
     public static final String OUTPUT_PATH = "output/ABDataOut.csv";
+    public static final String INVALID_DATA_PATH = "output/invalid/ABInvalidData.csv";
+
+    private final List<InvalidContact> INVALID_DATA_LIST;
+
+    public CSVOperations() {
+        INVALID_DATA_LIST = new LinkedList<>();
+    }
+
+    public List<InvalidContact> getInvalidDataList() {
+        return INVALID_DATA_LIST;
+    }
 
     public List<Contact> getListOfData() {
         Reader reader = null;
         try {
             reader = Files.newBufferedReader(Paths.get(INPUT_PATH));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
+        if (reader == null) throw new NullPointerException("Reader is null in CSVOperations getListOfData() method");
         CsvToBeanBuilder<Contact> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
         csvToBeanBuilder.withType(Contact.class);
         csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
         CsvToBean<Contact> csvToBean = csvToBeanBuilder.build();
-        return csvToBean.stream().toList();
+        List<Contact> list = csvToBean.parse();
+        List<Contact> checkedList = new LinkedList<>();
+        for (Contact c : list) {
+            if (c.getBookName().equals("Book Name")) continue;
+            if (!isValidContact(c)) {
+                System.out.println("\nSkipped -> Invalid contact: \n" + c);
+                InvalidContact invalidContact = new InvalidContact(c, "Invalid: failed in regex check");
+                INVALID_DATA_LIST.add(invalidContact);
+                continue;
+            }
+            checkedList.add(c);
+        }
+        return checkedList;
     }
 
     public Map<String, List<Contact>> readDictionary() {
-        List<Contact> listOfContact = getListOfData();
+        List<Contact> listOfContact;
+        try {
+            listOfContact = getListOfData();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
         Map<String, List<Contact>> dictionary = new HashMap<>();
         for (Contact c : listOfContact) {
             if (c.getBookName().equals("Book Name")) continue;
             if (dictionary.containsKey(c.getBookName())) {
                 if (!dictionary.get(c.getBookName()).contains(c))
                     dictionary.get(c.getBookName()).add(c);
+                else {
+                    System.out.println("\nSkipped -> Contact with name " + c.getFirstName() + " " + c.getLastName() +
+                            " already exists in this book!!!\n" + c);
+                    InvalidContact invalidContact = new InvalidContact(c, "Duplicate: contact with same name already exists in book");
+                    INVALID_DATA_LIST.add(invalidContact);
+                }
             } else {
                 List<Contact> list = new LinkedList<>();
                 list.add(c);
@@ -55,7 +90,35 @@ public class CSVOperations {
         return dictionary;
     }
 
-    private Contact getHeaderObject(){
+    private boolean isValidContact(Contact contact) {
+        if (!contact.getFirstName().matches(FIRST_NAME.getRegex())) {
+            return false;
+        }
+        if (!contact.getLastName().matches(LAST_NAME.getRegex())) {
+            return false;
+        }
+        if (!contact.getAddress().matches(ADDRESS.getRegex())) {
+            return false;
+        }
+        if (!contact.getCity().matches(CITY.getRegex())) {
+            return false;
+        }
+        if (!contact.getState().matches(STATE.getRegex())) {
+            return false;
+        }
+        if (!contact.getPin().matches(PIN.getRegex())) {
+            return false;
+        }
+        if (!contact.getPhoneNumber().matches(PHONE_NUMBER.getRegex())) {
+            return false;
+        }
+        if (!contact.getEmail().matches(EMAIL.getRegex())) {
+            return false;
+        }
+        return true;
+    }
+
+    private Contact getHeaderObject() {
         Contact c = new Contact();
         c.setBookName("Book Name");
         c.setFirstName("First Name");
@@ -70,18 +133,9 @@ public class CSVOperations {
     }
 
     public void writeDictionary(Map<String, List<Contact>> map) {
-        try {
-            Writer writer = new FileWriter(OUTPUT_PATH);
-            StatefulBeanToCsvBuilder<Contact> builder = new StatefulBeanToCsvBuilder<>(writer);
-            StatefulBeanToCsv<Contact> beanWriter = builder.build();
-            List<Contact> list = new LinkedList<>();
-            map.forEach((key, value) -> list.addAll(value));
-            beanWriter.write(getHeaderObject());
-            beanWriter.write(list);
-            writer.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        List<Contact> list = new LinkedList<>();
+        map.forEach((key, value) -> list.addAll(value));
+        writeListOfContact(list);
     }
 
     public void writeCountDictionary(Map<String, Long> map) {
@@ -90,7 +144,7 @@ public class CSVOperations {
             List<Map.Entry<String, Long>> list = new ArrayList<>(map.entrySet());
             list.forEach(entry -> {
                 try {
-                    writer.write(entry.getKey() + " : " + entry.getValue()+"\n");
+                    writer.write(entry.getKey() + " : " + entry.getValue() + "\n");
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
                 }
@@ -101,13 +155,25 @@ public class CSVOperations {
         }
     }
 
-    public void writeStreamOfContact(Stream<Contact> stream) {
+    public void writeListOfContact(List<Contact> contactList) {
         try {
             Writer writer = new FileWriter(OUTPUT_PATH);
             StatefulBeanToCsvBuilder<Contact> builder = new StatefulBeanToCsvBuilder<>(writer);
             StatefulBeanToCsv<Contact> beanWriter = builder.build();
             beanWriter.write(getHeaderObject());
-            beanWriter.write(stream);
+            beanWriter.write(contactList);
+            writer.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void writeListOfInvalidContact(List<InvalidContact> invalidContactList) {
+        try {
+            Writer writer = new FileWriter(INVALID_DATA_PATH);
+            StatefulBeanToCsvBuilder<InvalidContact> builder = new StatefulBeanToCsvBuilder<>(writer);
+            StatefulBeanToCsv<InvalidContact> beanWriter = builder.build();
+            beanWriter.write(invalidContactList);
             writer.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());

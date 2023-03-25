@@ -35,7 +35,7 @@ public class AddressBookMain {
             } catch (InputMismatchException e) {
                 System.out.println("Invalid Input!!!");
                 sc.nextLine();
-            } catch (AddressBookException e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }

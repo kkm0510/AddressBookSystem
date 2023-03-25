@@ -1,16 +1,22 @@
 package com.addressbook.service;
 
 import com.addressbook.enums.DictionaryEnum;
+
 import static com.addressbook.enums.DictionaryEnum.*;
+
 import com.addressbook.enums.InputEnum;
+
 import static com.addressbook.enums.InputEnum.*;
+
 import com.addressbook.enums.SortEnum;
 import com.addressbook.enums.WhereToPrintEnum;
 import com.addressbook.exceptions.AddressBookException;
 import com.addressbook.fileio.CSVOperations;
 import com.addressbook.fileio.JSONOperations;
-import com.addressbook.model.Contact;
+import com.addressbook.models.Contact;
+import com.addressbook.models.InvalidContact;
 
+import static com.addressbook.fileio.CSVOperations.writeListOfInvalidContact;
 import static com.addressbook.util.Util.*;
 
 import java.util.*;
@@ -89,7 +95,7 @@ public class AddressBookDictionary {
                         .toList();
         if (listOfContactsWithGivenName.size() == 0)
             throw new AddressBookException("Contact doesn't exist!!!");
-        whereToPrintContactsStream(listOfContactsWithGivenName.stream());
+        whereToPrintContactsList(listOfContactsWithGivenName);
     }
 
     private void searchByPlace(InputEnum placeType, DictionaryEnum dictionaryType) throws AddressBookException {
@@ -213,24 +219,22 @@ public class AddressBookDictionary {
                 System.out.println(e.getMessage());
             }
             Stream<Contact> sortedStream = SortEnum.values()[choice - 1].getSortedContacts(getContactsStream());
-            whereToPrintContactsStream(sortedStream);
+            whereToPrintContactsList(sortedStream.toList());
         }
     }
 
-
-
-    public void fileIO() throws AddressBookException {
+    public void fileIO() {
         Scanner sc = new Scanner(System.in);
         while (true) {
             try {
-                System.out.print("\nEnter choice -> \n(1)Read CSV file (2)Write to CSV file " +
-                        "(3)Read JSON file (4) Write to JSON file (0)Go back to main menu : ");
+                System.out.print("\nEnter choice -> \n(1)Read CSV file (2)Read JSON file " +
+                        "(3)Write to CSV file (4) Write to JSON file (0)Go back to main menu : ");
                 int choice = sc.nextInt();
                 sc.nextLine();
                 switch (choice) {
                     case READ_CSV -> readCSVData();
-                    case WRITE_CSV -> writeDataToCSV(mainDictionary);
                     case READ_JSON -> readJSONData();
+                    case WRITE_CSV -> writeDataToCSV(mainDictionary);
                     case WRITE_JSON -> writeDataToJSON(mainDictionary);
                     case EXIT -> {
                         return;
@@ -249,7 +253,44 @@ public class AddressBookDictionary {
     public void readCSVData() throws AddressBookException {
         CSVOperations read = new CSVOperations();
         mainDictionary = read.readDictionary();
-        System.out.println("Data loaded successfully");
+        if (mainDictionary == null) throw new AddressBookException("Process Failed!!!");
+        System.out.println("Process Completed");
+        List<InvalidContact> list = read.getInvalidDataList();
+        if (list.size() > 0)
+            whereToWriteInvalidContacts(list);
+    }
+
+    public void readJSONData() throws AddressBookException {
+        JSONOperations read = new JSONOperations();
+        mainDictionary = read.readDictionary();
+        if (mainDictionary == null) throw new AddressBookException("Process Failed!!!");
+        System.out.println("Process Completed");
+        List<InvalidContact> list = read.getInvalidDataList();
+        if (list.size() > 0)
+            whereToWriteInvalidContacts(list);
+    }
+
+    public void whereToWriteInvalidContacts(List<InvalidContact> list)  {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            try {
+                System.out.print("\nWhere to write invalid contacts (1)CSV (2)JSON (0)Go back to previous menu: ");
+                int choice = sc.nextInt();
+                if (choice == 0) return;
+                sc.nextLine();
+                switch (WhereToPrintEnum.values()[choice]) {
+                    case CSV -> CSVOperations.writeListOfInvalidContact(list);
+                    case JSON -> JSONOperations.writeListOfInvalidContact(list);
+                    default -> throw new AddressBookException("Invalid Input!!!");
+                }
+                System.out.println("Process completed");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid Input!!!");
+                sc.nextLine();
+            } catch (AddressBookException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public void writeDataToCSV(Map<String, List<Contact>> dictionary) throws AddressBookException {
@@ -257,13 +298,7 @@ public class AddressBookDictionary {
             throw new AddressBookException("No address book present!!!");
         CSVOperations write = new CSVOperations();
         write.writeDictionary(dictionary);
-        System.out.println("Data written successfully");
-    }
-
-    public void readJSONData() {
-        JSONOperations read = new JSONOperations();
-        mainDictionary = read.readDictionary();
-        System.out.println("Data loaded successfully");
+        System.out.println("Process Completed");
     }
 
     public void writeDataToJSON(Map<String, List<Contact>> dictionary) throws AddressBookException {
@@ -271,6 +306,6 @@ public class AddressBookDictionary {
             throw new AddressBookException("No address book present!!!");
         JSONOperations write = new JSONOperations();
         write.writeDictionary(dictionary);
-        System.out.println("Data written successfully");
+        System.out.println("Process Completed");
     }
 }

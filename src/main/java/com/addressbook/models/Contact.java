@@ -1,4 +1,4 @@
-package com.addressbook.model;
+package com.addressbook.models;
 
 import com.opencsv.bean.CsvBindByPosition;
 
@@ -63,14 +63,6 @@ public class Contact implements Comparable<Contact> {
         return address;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
     public String getCity() {
         return city;
     }
@@ -81,6 +73,14 @@ public class Contact implements Comparable<Contact> {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setPin(String pin) {
@@ -105,15 +105,17 @@ public class Contact implements Comparable<Contact> {
 
     @Override
     public String toString() {
-        return "\nFirst Name: " + firstName +
-                "\nLast Name: " + lastName +
-                "\nAddress: " + address +
-                "\nCity: " + city +
-                "\nState: " + state +
-                "\nPin: " + pin +
-                "\nPhone Number: " + phoneNumber +
-                "\nEmail: " + email +
-                "\n";
+        return "Contact{" +
+                "bookName='" + bookName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", pin='" + pin + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 
     @Override
