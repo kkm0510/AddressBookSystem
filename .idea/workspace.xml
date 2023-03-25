@@ -4,15 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43f655bd-1e2b-488e-84a4-6b3612d61d0f" name="Changes" comment="ADDED : code to store invalid contacts">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/ABFileOperations.java" afterDir="false" />
+    <list default="true" id="43f655bd-1e2b-488e-84a4-6b3612d61d0f" name="Changes" comment="ADDED : code to add address book file io interface">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/features.txt" beforeDir="false" afterPath="$PROJECT_DIR$/features.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/invalid/ABInvalidData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/invalid/ABInvalidData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/enums/WhereToPrintEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/enums/WhereToPrintEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/CSVOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/CSVOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/JSONOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/JSONOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/models/InvalidContact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/models/InvalidContact.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/service/AddressBookDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/service/AddressBookDictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/CSVOperations.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/CSVOperations.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/service/AddressBookDictionary$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/service/AddressBookDictionary$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/service/AddressBookDictionary.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/service/AddressBookDictionary.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

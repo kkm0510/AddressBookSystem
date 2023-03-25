@@ -158,7 +158,7 @@ public class AddressBookDictionary {
         while (true) {
             System.out.print("\nCount menu -> \n(1)Count contacts in city dictionary " +
                     "(2)Count contacts in state dictionary (0)Go back to main menu : ");
-            int choice = 0;
+            int choice;
             try {
                 choice = sc.nextInt();
                 sc.nextLine();
@@ -204,7 +204,7 @@ public class AddressBookDictionary {
         while (true) {
             System.out.print("\nSort menu -> \n(1)Sort entries by name (2)Sort entries by city " +
                     "(3)Sort entries by state (4)Sort entries by pin (0) Go back to main menu : ");
-            int choice = 0;
+            int choice;
             try {
                 choice = sc.nextInt();
                 sc.nextLine();

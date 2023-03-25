@@ -1,2 +1,3 @@
-"Invalid: failed in regex check","Contact{bookName='Friends', firstName='saurabh', lastName='Bahuguna', address='affdagsdg', city='Dehradun', state='Uttarakhand', pin='248001', phoneNumber='9411479266', email='sb@gmail.com'}"
-"Duplicate: contact with same name already exists in book","Contact{bookName='Relatives', firstName='Aditya', lastName='Singh', address='sadkjshd', city='Delhi', state='Delhi', pin='248000', phoneNumber='7668697562', email='am@gmail.com'}"
+"Reason","Book Name","First Name","Last Name","Address","City","State","Pin","Phone Number","Email"
+"Invalid: failed in regex check","Friends","saurabh","Bahuguna","affdagsdg","Dehradun","Uttarakhand","248001","9411479266","sb@gmail.com"
+"Duplicate: contact with same name already exists in book","Friends","Shrey","Bhatt","asfashfh","Shimla","Himachal","247008","7895462162","sb@gmail.com"

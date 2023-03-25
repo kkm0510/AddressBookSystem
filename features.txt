@@ -1,18 +1,7 @@
 #Features Added ->
 
-* All inputs(console, csv, json) read are checked via regex.
+* All inputs(console, csv, json) are checked via regex before loading and skipped if wrong.
 
 * Repeated names in same book are skipped while reading data from console/csv/json.
 
 * All invalid data along with reason for being invalid is collected and feature to store it in a separate file is provided.
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#Issues resolved ->
-
-* Input mismatch exception and other exceptions.
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#Issues remaining ->
-
-* Serialization of invalid contact data in csv file.
-
