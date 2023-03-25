@@ -4,24 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43f655bd-1e2b-488e-84a4-6b3612d61d0f" name="Changes" comment="ADDED : code to read and write data in csv">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_9.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/enums/WhereToPrintEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/exceptions/AddressBookException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/CSVOperations.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/JSONOperations.java" afterDir="false" />
+    <list default="true" id="43f655bd-1e2b-488e-84a4-6b3612d61d0f" name="Changes" comment="REFACTORED : code to read and write all data in csv">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-03-2023_13_58__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07-03-2023_13_58__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AddressBookSystem.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AddressBookSystem.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/controller/AddressBookMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/controller/AddressBookMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/enums/DictionaryEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/enums/DictionaryEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/csvoperations/AddressBookCSV.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/csvoperations/ReadData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/csvoperations/WriteData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/model/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/model/Contact.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/service/AddressBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/service/AddressBook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/service/AddressBookDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/service/AddressBookDictionary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/util/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/util/Util.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="UC12-SORT_BY_OTHER" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -58,19 +45,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Git.Branch.Popup.ShowAllRemotes": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/DELL/OneDrive/Desktop/Main Project/AddressBook-Trial",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.23144531",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/DELL/OneDrive/Desktop/Main Project/AddressBook-Trial&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.23144531&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\DELL\OneDrive\Desktop\Assignments\AddressBookSystem\output" />
@@ -264,8 +251,26 @@
       <option name="project" value="LOCAL" />
       <updated>1679491920110</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="REFACTORED : code to read and write all data in csv">
+      <created>1679683585942</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1679683585943</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ADDED : welcome message" />
@@ -289,6 +294,7 @@
     <MESSAGE value="ADDED : code to count contacts by city and state" />
     <MESSAGE value="REFACTORED : made address book methods static" />
     <MESSAGE value="ADDED : code to sort contacts by name" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADDED : code to sort contacts by name" />
+    <MESSAGE value="REFACTORED : code to read and write all data in csv" />
+    <option name="LAST_COMMIT_MESSAGE" value="REFACTORED : code to read and write all data in csv" />
   </component>
 </project>

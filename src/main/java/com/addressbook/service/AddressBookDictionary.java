@@ -1,7 +1,9 @@
 package com.addressbook.service;
 
 import com.addressbook.enums.DictionaryEnum;
+import static com.addressbook.enums.DictionaryEnum.*;
 import com.addressbook.enums.InputEnum;
+import static com.addressbook.enums.InputEnum.*;
 import com.addressbook.enums.SortEnum;
 import com.addressbook.enums.WhereToPrintEnum;
 import com.addressbook.exceptions.AddressBookException;
@@ -59,8 +61,8 @@ public class AddressBookDictionary {
                 sc.nextLine();
                 switch (choice) {
                     case SEARCH_CONTACT_BY_NAME -> searchByName(mainDictionary);
-                    case SEARCH_CONTACT_IN_CITY -> searchByPlace(InputEnum.CITY, DictionaryEnum.CITY_DICTIONARY);
-                    case SEARCH_CONTACT_IN_STATE -> searchByPlace(InputEnum.STATE, DictionaryEnum.STATE_DICTIONARY);
+                    case SEARCH_CONTACT_IN_CITY -> searchByPlace(CITY, CITY_DICTIONARY);
+                    case SEARCH_CONTACT_IN_STATE -> searchByPlace(STATE, STATE_DICTIONARY);
                     case EXIT -> {
                         return;
                     }
@@ -76,8 +78,8 @@ public class AddressBookDictionary {
     }
 
     private void searchByName(Map<String, List<Contact>> dictionary) throws AddressBookException {
-        String firstName = takeValidInput(InputEnum.FIRST_NAME);
-        String lastName = takeValidInput(InputEnum.LAST_NAME);
+        String firstName = takeValidInput(FIRST_NAME);
+        String lastName = takeValidInput(LAST_NAME);
         List<Contact> listOfContactsWithGivenName =
                 dictionary
                         .entrySet()
@@ -111,9 +113,9 @@ public class AddressBookDictionary {
                 switch (choice) {
                     case PRINT_MAIN_DICTIONARY -> whereToPrintDictionary(mainDictionary);
                     case PRINT_CITY_DICTIONARY ->
-                            whereToPrintDictionary(DictionaryEnum.CITY_DICTIONARY.getPlaceDictionary(getContactsStream()));
+                            whereToPrintDictionary(CITY_DICTIONARY.getPlaceDictionary(getContactsStream()));
                     case PRINT_STATE_DICTIONARY ->
-                            whereToPrintDictionary(DictionaryEnum.STATE_DICTIONARY.getPlaceDictionary(getContactsStream()));
+                            whereToPrintDictionary(STATE_DICTIONARY.getPlaceDictionary(getContactsStream()));
                     case EXIT -> {
                         return;
                     }
