@@ -1,3 +1,3 @@
-"Reason","Book Name","First Name","Last Name","Address","City","State","Pin","Phone Number","Email"
-"Invalid: failed in regex check","Friends","saurabh","Bahuguna","affdagsdg","Dehradun","Uttarakhand","248001","9411479266","sb@gmail.com"
-"Duplicate: contact with same name already exists in book","Friends","Shrey","Bhatt","asfashfh","Shimla","Himachal","247008","7895462162","sb@gmail.com"
+"Book Name","First Name","Last Name","Address","City","State","Pin","Phone Number","Email","Reason"
+"Friends","saurabh","Bahuguna","affdagsdg","Dehradun","Uttarakhand","248001","9411479266","sb@gmail.com","Invalid: failed in regex check"
+"Friends","Shrey","Bhatt","asfashfh","Shimla","Himachal","247008","7895462162","sb@gmail.com","Duplicate: contact with same name already exists in book"

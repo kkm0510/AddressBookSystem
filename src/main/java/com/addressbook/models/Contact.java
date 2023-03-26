@@ -5,31 +5,31 @@ import com.opencsv.bean.CsvBindByPosition;
 public class Contact implements Comparable<Contact> {
 
     @CsvBindByPosition(position = 0)
-    private String bookName;
+    protected String bookName;
 
     @CsvBindByPosition(position = 1)
-    private String firstName;
+    protected String firstName;
 
     @CsvBindByPosition(position = 2)
-    private String lastName;
+    protected String lastName;
 
     @CsvBindByPosition(position = 3)
-    private String address;
+    protected String address;
 
     @CsvBindByPosition(position = 4)
-    private String city;
+    protected String city;
 
     @CsvBindByPosition(position = 5)
-    private String state;
+    protected String state;
 
     @CsvBindByPosition(position = 6)
-    private String pin;
+    protected String pin;
 
     @CsvBindByPosition(position = 7)
-    private String phoneNumber;
+    protected String phoneNumber;
 
     @CsvBindByPosition(position = 8)
-    private String email;
+    protected String email;
 
     public String getFirstName() {
         return firstName;
@@ -105,17 +105,15 @@ public class Contact implements Comparable<Contact> {
 
     @Override
     public String toString() {
-        return "Contact{" +
-                "bookName='" + bookName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", pin='" + pin + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return "\nFirst Name = " + firstName +
+                "\nLast Name = " + lastName  +
+                "\nAddress = " + address  +
+                "\nCity = " + city  +
+                "\nState = " + state +
+                "\nPin = " + pin +
+                "\nPhone Number = " + phoneNumber +
+                "\nEmail = " + email +
+                "\n";
     }
 
     @Override

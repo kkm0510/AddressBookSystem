@@ -46,7 +46,7 @@ public class JSONOperations implements ABFileOperations {
             for (Contact c : list) {
                 if (!isValidContact(c)) {
                     System.out.println("\nSkipped -> Invalid contact: \n" + c);
-                    InvalidContact invalidContact = new InvalidContact(c, "Invalid: failed in regex check");
+                    InvalidContact invalidContact = new InvalidContact(c, "is invalid: failed in regex check");
                     INVALID_DATA_LIST.add(invalidContact);
                     continue;
                 }
@@ -70,7 +70,7 @@ public class JSONOperations implements ABFileOperations {
                 else {
                     System.out.println("\nSkipped -> Contact with name " + c.getFirstName() + " " + c.getLastName() +
                             " already exists in this book!!!\n" + c);
-                    InvalidContact invalidContact = new InvalidContact(c, "Duplicate: contact with same name already exists in book");
+                    InvalidContact invalidContact = new InvalidContact(c, "is duplicate: contact with same name already exists in book");
                     INVALID_DATA_LIST.add(invalidContact);
                 }
             } else {

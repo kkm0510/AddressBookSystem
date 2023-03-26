@@ -47,7 +47,7 @@ public class CSVOperations implements ABFileOperations {
                 if (c.getBookName().equals("Book Name")) continue;
                 if (!isValidContact(c)) {
                     System.out.println("\nSkipped -> Invalid contact: \n" + c);
-                    InvalidContact invalidContact = new InvalidContact(c, "Invalid: failed in regex check");
+                    InvalidContact invalidContact = new InvalidContact(c, "is invalid: failed in regex check");
                     INVALID_DATA_LIST.add(invalidContact);
                     continue;
                 }
@@ -78,7 +78,7 @@ public class CSVOperations implements ABFileOperations {
                 else {
                     System.out.println("\nSkipped -> Contact with name " + c.getFirstName() + " " + c.getLastName() +
                             " already exists in this book!!!\n" + c);
-                    InvalidContact invalidContact = new InvalidContact(c, "Duplicate: contact with same name already exists in book");
+                    InvalidContact invalidContact = new InvalidContact(c, "is duplicate: contact with same name already exists in book");
                     INVALID_DATA_LIST.add(invalidContact);
                 }
             } else {
@@ -116,20 +116,6 @@ public class CSVOperations implements ABFileOperations {
         return contact.getEmail().matches(EMAIL.getRegex());
     }
 
-    private Contact getHeaderForContact() {
-        Contact c = new Contact();
-        c.setBookName("Book Name");
-        c.setFirstName("First Name");
-        c.setLastName("Last Name");
-        c.setAddress("Address");
-        c.setCity("City");
-        c.setState("State");
-        c.setPin("Pin");
-        c.setPhoneNumber("Phone Number");
-        c.setEmail("Email");
-        return c;
-    }
-
     @Override
     public void writeDictionary(Map<String, List<Contact>> map) {
         List<Contact> list = new LinkedList<>();
@@ -151,29 +137,15 @@ public class CSVOperations implements ABFileOperations {
 
     @Override
     public void writeListOfContact(List<Contact> contactList) {
-        try ( Writer writer = new FileWriter(OUTPUT_PATH);){
+        try ( Writer writer = new FileWriter(OUTPUT_PATH)){
             StatefulBeanToCsvBuilder<Contact> builder = new StatefulBeanToCsvBuilder<>(writer);
             StatefulBeanToCsv<Contact> beanWriter = builder.build();
-            beanWriter.write(getHeaderForContact());
+            Contact contact=new Contact();
+            beanWriter.write(getHeaderForOutput(contact));
             beanWriter.write(contactList);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    private InvalidContact getHeaderForInvalidContact() {
-        InvalidContact c = new InvalidContact();
-        c.setReason("Reason");
-        c.setBookName("Book Name");
-        c.setFirstName("First Name");
-        c.setLastName("Last Name");
-        c.setAddress("Address");
-        c.setCity("City");
-        c.setState("State");
-        c.setPin("Pin");
-        c.setPhoneNumber("Phone Number");
-        c.setEmail("Email");
-        return c;
     }
 
     @Override
@@ -181,10 +153,25 @@ public class CSVOperations implements ABFileOperations {
         try (Writer writer = new FileWriter(INVALID_DATA_PATH)) {
             StatefulBeanToCsvBuilder<InvalidContact> builder = new StatefulBeanToCsvBuilder<>(writer);
             StatefulBeanToCsv<InvalidContact> beanWriter = builder.build();
-            beanWriter.write(getHeaderForInvalidContact());
+            InvalidContact invalidContact=new InvalidContact();
+            invalidContact.setReason("Reason");
+            beanWriter.write(getHeaderForOutput(invalidContact));
             beanWriter.write(invalidContactList);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private <T extends Contact> T getHeaderForOutput(T contact) {
+        contact.setBookName("Book Name");
+        contact.setFirstName("First Name");
+        contact.setLastName("Last Name");
+        contact.setAddress("Address");
+        contact.setCity("City");
+        contact.setState("State");
+        contact.setPin("Pin");
+        contact.setPhoneNumber("Phone Number");
+        contact.setEmail("Email");
+        return contact;
     }
 }
