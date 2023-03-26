@@ -18,7 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class CSVOperations implements ABFileOperations{
+public class CSVOperations implements ABFileOperations {
 
     public static final String INPUT_PATH = "src/main/resources/input/ABDataIn.csv";
     public static final String OUTPUT_PATH = "output/ABDataOut.csv";
@@ -27,7 +27,7 @@ public class CSVOperations implements ABFileOperations{
     private final List<InvalidContact> INVALID_DATA_LIST;
 
     public CSVOperations() {
-        this.INVALID_DATA_LIST = new LinkedList<>();
+        INVALID_DATA_LIST = new LinkedList<>();
     }
 
     public List<InvalidContact> getInvalidDataList() {
@@ -36,30 +36,28 @@ public class CSVOperations implements ABFileOperations{
 
     @Override
     public List<Contact> getListOfData() {
-        Reader reader = null;
-        try {
-            reader = Files.newBufferedReader(Paths.get(INPUT_PATH));
+        try (Reader reader = Files.newBufferedReader(Paths.get(INPUT_PATH))) {
+            CsvToBeanBuilder<Contact> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
+            csvToBeanBuilder.withType(Contact.class);
+            csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
+            CsvToBean<Contact> csvToBean = csvToBeanBuilder.build();
+            List<Contact> list = csvToBean.parse();
+            List<Contact> checkedList = new LinkedList<>();
+            for (Contact c : list) {
+                if (c.getBookName().equals("Book Name")) continue;
+                if (!isValidContact(c)) {
+                    System.out.println("\nSkipped -> Invalid contact: \n" + c);
+                    InvalidContact invalidContact = new InvalidContact(c, "Invalid: failed in regex check");
+                    INVALID_DATA_LIST.add(invalidContact);
+                    continue;
+                }
+                checkedList.add(c);
+            }
+            return checkedList;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        if (reader == null) throw new NullPointerException("Reader is null in CSVOperations getListOfData() method");
-        CsvToBeanBuilder<Contact> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
-        csvToBeanBuilder.withType(Contact.class);
-        csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
-        CsvToBean<Contact> csvToBean = csvToBeanBuilder.build();
-        List<Contact> list = csvToBean.parse();
-        List<Contact> checkedList = new LinkedList<>();
-        for (Contact c : list) {
-            if (c.getBookName().equals("Book Name")) continue;
-            if (!isValidContact(c)) {
-                System.out.println("\nSkipped -> Invalid contact: \n" + c);
-                InvalidContact invalidContact = new InvalidContact(c, "Invalid: failed in regex check");
-                INVALID_DATA_LIST.add(invalidContact);
-                continue;
-            }
-            checkedList.add(c);
-        }
-        return checkedList;
     }
 
     @Override
@@ -141,17 +139,11 @@ public class CSVOperations implements ABFileOperations{
 
     @Override
     public void writeCountDictionary(Map<String, Long> map) {
-        try {
-            Writer writer = new FileWriter(OUTPUT_PATH);
+        try (Writer writer = new FileWriter(OUTPUT_PATH)) {
             List<Map.Entry<String, Long>> list = new ArrayList<>(map.entrySet());
-            list.forEach(entry -> {
-                try {
-                    writer.write(entry.getKey() + " : " + entry.getValue() + "\n");
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                }
-            });
-            writer.close();
+            for (Map.Entry<String, Long> entry : list) {
+                writer.write(entry.getKey() + " : " + entry.getValue() + "\n");
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -159,13 +151,11 @@ public class CSVOperations implements ABFileOperations{
 
     @Override
     public void writeListOfContact(List<Contact> contactList) {
-        try {
-            Writer writer = new FileWriter(OUTPUT_PATH);
+        try ( Writer writer = new FileWriter(OUTPUT_PATH);){
             StatefulBeanToCsvBuilder<Contact> builder = new StatefulBeanToCsvBuilder<>(writer);
             StatefulBeanToCsv<Contact> beanWriter = builder.build();
             beanWriter.write(getHeaderForContact());
             beanWriter.write(contactList);
-            writer.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -188,13 +178,11 @@ public class CSVOperations implements ABFileOperations{
 
     @Override
     public void writeListOfInvalidContact(List<InvalidContact> invalidContactList) {
-        try {
-            Writer writer = new FileWriter(INVALID_DATA_PATH);
+        try (Writer writer = new FileWriter(INVALID_DATA_PATH)) {
             StatefulBeanToCsvBuilder<InvalidContact> builder = new StatefulBeanToCsvBuilder<>(writer);
             StatefulBeanToCsv<InvalidContact> beanWriter = builder.build();
             beanWriter.write(getHeaderForInvalidContact());
             beanWriter.write(invalidContactList);
-            writer.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

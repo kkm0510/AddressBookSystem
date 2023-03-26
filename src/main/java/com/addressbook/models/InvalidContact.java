@@ -45,15 +45,15 @@ public class InvalidContact {
     }
 
     public InvalidContact(Contact c, String reason) {
-        bookName=c.getBookName();
+        bookName = c.getBookName();
         firstName = c.getFirstName();
-        lastName= c.getLastName();
-        address=c.getAddress();
-        city=c.getCity();
-        state=c.getState();
-        pin=c.getPin();
-        phoneNumber=c.getPhoneNumber();
-        email=c.getEmail();
+        lastName = c.getLastName();
+        address = c.getAddress();
+        city = c.getCity();
+        state = c.getState();
+        pin = c.getPin();
+        phoneNumber = c.getPhoneNumber();
+        email = c.getEmail();
         this.reason = reason;
     }
 

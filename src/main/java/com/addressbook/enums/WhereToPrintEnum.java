@@ -11,7 +11,6 @@ import java.util.Map;
 public enum WhereToPrintEnum {
 
     CONSOLE {
-
         @Override
         public void printDictionary(Map<String, List<Contact>> dictionary) {
             dictionary.entrySet().stream()
@@ -31,48 +30,46 @@ public enum WhereToPrintEnum {
     },
 
     CSV {
-
         @Override
         public void printDictionary(Map<String, List<Contact>> dictionary) {
-            ABFileOperations csv=new CSVOperations();
+            ABFileOperations csv = new CSVOperations();
             csv.writeDictionary(dictionary);
             System.out.println("Data written successfully");
         }
 
         @Override
         public void printCountDictionary(Map<String, Long> dictionary) {
-            ABFileOperations csv=new CSVOperations();
+            ABFileOperations csv = new CSVOperations();
             csv.writeCountDictionary(dictionary);
             System.out.println("Data written successfully");
         }
 
         @Override
         public void printContactList(List<Contact> list) {
-            ABFileOperations csv=new CSVOperations();
+            ABFileOperations csv = new CSVOperations();
             csv.writeListOfContact(list);
             System.out.println("Data written successfully");
         }
     },
 
     JSON {
-
         @Override
         public void printDictionary(Map<String, List<Contact>> dictionary) {
-            ABFileOperations json=new JSONOperations();
+            ABFileOperations json = new JSONOperations();
             json.writeDictionary(dictionary);
             System.out.println("Data written successfully");
         }
 
         @Override
         public void printCountDictionary(Map<String, Long> dictionary) {
-            ABFileOperations json=new JSONOperations();
+            ABFileOperations json = new JSONOperations();
             json.writeCountDictionary(dictionary);
             System.out.println("Data written successfully");
         }
 
         @Override
         public void printContactList(List<Contact> list) {
-            ABFileOperations json=new JSONOperations();
+            ABFileOperations json = new JSONOperations();
             json.writeListOfContact(list);
             System.out.println("Data written successfully");
         }

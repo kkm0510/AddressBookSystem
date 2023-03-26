@@ -60,7 +60,7 @@ public class Util {
 
     public static void whereToPrintContactsList(List<Contact> list) {
         Scanner sc = new Scanner(System.in);
-        while(true) {
+        while (true) {
             try {
                 System.out.print("\nWhere to print this list -> (1)Console (2)CSV file (3)JSON file (0)Go back to previous menu : ");
                 int choice = sc.nextInt();

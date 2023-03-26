@@ -1,6 +1,7 @@
 package com.addressbook.service;
 
 import static com.addressbook.enums.InputEnum.*;
+
 import com.addressbook.exceptions.AddressBookException;
 import com.addressbook.models.Contact;
 import com.addressbook.enums.InputEnum;
@@ -107,7 +108,7 @@ public class AddressBook {
     private void editContact(List<Contact> book) throws AddressBookException {
         if (book.size() == 0)
             throw new AddressBookException("AddressBook is empty");
-        Scanner sc=new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         String firstName = takeValidInput(FIRST_NAME);
         String lastName = takeValidInput(LAST_NAME);
         Contact contact = book.stream()
@@ -145,7 +146,7 @@ public class AddressBook {
     private void deleteContact(List<Contact> book) throws AddressBookException {
         if (book.isEmpty())
             throw new AddressBookException("Book is empty!!!");
-        Contact c=new Contact();
+        Contact c = new Contact();
         c.setFirstName(takeValidInput(FIRST_NAME));
         c.setLastName(takeValidInput(LAST_NAME));
         boolean removed = book.remove(c);

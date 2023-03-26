@@ -29,7 +29,7 @@ public class JSONOperations implements ABFileOperations {
     private final List<InvalidContact> INVALID_DATA_LIST;
 
     public JSONOperations() {
-        this.INVALID_DATA_LIST = new LinkedList<>();
+        INVALID_DATA_LIST = new LinkedList<>();
     }
 
     public List<InvalidContact> getInvalidDataList() {
@@ -38,27 +38,25 @@ public class JSONOperations implements ABFileOperations {
 
     @Override
     public List<Contact> getListOfData() {
-        Reader reader = null;
-        try {
-            reader = Files.newBufferedReader(Paths.get(INPUT_PATH));
+        try (Reader reader = Files.newBufferedReader(Paths.get(INPUT_PATH))) {
+            Gson gson = new Gson();
+            List<Contact> list = gson.fromJson(reader, new TypeToken<List<Contact>>() {
+            }.getType());
+            List<Contact> checkedList = new LinkedList<>();
+            for (Contact c : list) {
+                if (!isValidContact(c)) {
+                    System.out.println("\nSkipped -> Invalid contact: \n" + c);
+                    InvalidContact invalidContact = new InvalidContact(c, "Invalid: failed in regex check");
+                    INVALID_DATA_LIST.add(invalidContact);
+                    continue;
+                }
+                checkedList.add(c);
+            }
+            return checkedList;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        Gson gson = new Gson();
-        if (reader == null) throw new NullPointerException("Reader is null in JSONOperations getListOfData() method");
-        List<Contact> list = gson.fromJson(reader, new TypeToken<List<Contact>>() {
-        }.getType());
-        List<Contact> checkedList = new LinkedList<>();
-        for (Contact c : list) {
-            if (!isValidContact(c)) {
-                System.out.println("\nSkipped -> Invalid contact: \n" + c);
-                InvalidContact invalidContact = new InvalidContact(c, "Invalid: failed in regex check");
-                INVALID_DATA_LIST.add(invalidContact);
-                continue;
-            }
-            checkedList.add(c);
-        }
-        return checkedList;
     }
 
     @Override
@@ -120,13 +118,10 @@ public class JSONOperations implements ABFileOperations {
     @Override
     public void writeCountDictionary(Map<String, Long> map) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        FileWriter writer;
-        try {
-            writer = new FileWriter(OUTPUT_PATH);
+        try (FileWriter writer = new FileWriter(OUTPUT_PATH)) {
             Type mapType = new TypeToken<Map<String, Long>>() {
             }.getType();
             gson.toJson(map, mapType, writer);
-            writer.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -135,13 +130,10 @@ public class JSONOperations implements ABFileOperations {
     @Override
     public void writeListOfContact(List<Contact> contactList) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        FileWriter writer;
-        try {
-            writer = new FileWriter(OUTPUT_PATH);
+        try (FileWriter writer = new FileWriter(OUTPUT_PATH)) {
             Type listType = new TypeToken<List<Contact>>() {
             }.getType();
             gson.toJson(contactList, listType, writer);
-            writer.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -150,13 +142,10 @@ public class JSONOperations implements ABFileOperations {
     @Override
     public void writeListOfInvalidContact(List<InvalidContact> invalidContactList) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        FileWriter writer;
-        try {
-            writer = new FileWriter(INVALID_DATA_PATH);
+        try (FileWriter writer = new FileWriter(INVALID_DATA_PATH)) {
             Type listType = new TypeToken<List<InvalidContact>>() {
             }.getType();
             gson.toJson(invalidContactList, listType, writer);
-            writer.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
