@@ -1,79 +1,74 @@
-[
-  {
-    "bookName": "Friends",
-    "firstName": "saurabh",
-    "lastName": "Bahuguna",
-    "address": "affdagsdg",
-    "city": "Dehradun",
-    "state": "Uttarakhand",
-    "pin": "248001",
-    "phoneNumber": "9411479266",
-    "email": "sb@gmail.com"
-  },
-  {
-    "bookName": "Friends",
-    "firstName": "Shrey",
-    "lastName": "Bhatt",
-    "address": "faasasfsdg",
-    "city": "Tehri",
-    "state": "Uttarakhand",
-    "pin": "248006",
-    "phoneNumber": "9477513256",
-    "email": "shreybhatt@gmail.com"
-  },
-  {
-    "bookName": "Friends",
-    "firstName": "Aviral",
-    "lastName": "Gaur",
-    "address": "sajdsaha",
-    "city": "Mumbai",
-    "state": "Maharashtra",
-    "pin": "248003",
-    "phoneNumber": "7668451236",
-    "email": "ag@gmail.com"
-  },
-  {
-    "bookName": "Family",
-    "firstName": "Kamal",
-    "lastName": "Kanti",
-    "address": "sadjhsjh",
-    "city": "Dehradun",
-    "state": "Uttarakhand",
-    "pin": "248001",
-    "phoneNumber": "9411549342",
-    "email": "kamalkanti@gmail.com"
-  },
-  {
-    "bookName": "Family",
-    "firstName": "Avi",
-    "lastName": "Saini",
-    "address": "sadkjfhjk",
-    "city": "Meerut",
-    "state": "Uttar Pradesh",
-    "pin": "246001",
-    "phoneNumber": "9411543265",
-    "email": "avisaini@gmail.com"
-  },
-  {
-    "bookName": "Relatives",
-    "firstName": "Aditya",
-    "lastName": "Singh",
-    "address": "sadkjshd",
-    "city": "Delhi",
-    "state": "Delhi",
-    "pin": "248000",
-    "phoneNumber": "7668697562",
-    "email": "am@gmail.com"
-  },
-  {
-    "bookName": "Relatives ",
-    "firstName": "Rishu",
-    "lastName": "Chaudhary",
-    "address": "sadasjdhh",
-    "city": "Shimla",
-    "state": "Himachal",
-    "pin": "215441",
-    "phoneNumber": "7525225542",
-    "email": "rc@gmail.com"
-  }
-]
+{
+  "Friends": [
+    {
+      "bookName": "Friends",
+      "firstName": "Shrey",
+      "lastName": "Bhatt",
+      "address": "faasasfsdg",
+      "city": "Tehri",
+      "state": "Uttarakhand",
+      "pin": "248006",
+      "phoneNumber": "9477513256",
+      "email": "shreybhatt@gmail.com"
+    },
+    {
+      "bookName": "Friends",
+      "firstName": "Aviral",
+      "lastName": "Gaur",
+      "address": "sajdsaha",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pin": "248003",
+      "phoneNumber": "7668451236",
+      "email": "ag@gmail.com"
+    }
+  ],
+  "Family": [
+    {
+      "bookName": "Family",
+      "firstName": "Kamal",
+      "lastName": "Kanti",
+      "address": "sadjhsjh",
+      "city": "Dehradun",
+      "state": "Uttarakhand",
+      "pin": "248001",
+      "phoneNumber": "9411549342",
+      "email": "kamalkanti@gmail.com"
+    },
+    {
+      "bookName": "Family",
+      "firstName": "Avi",
+      "lastName": "Saini",
+      "address": "sadkjfhjk",
+      "city": "Meerut",
+      "state": "Uttar Pradesh",
+      "pin": "246001",
+      "phoneNumber": "9411543265",
+      "email": "avisaini@gmail.com"
+    }
+  ],
+  "Relatives": [
+    {
+      "bookName": "Relatives",
+      "firstName": "Aditya",
+      "lastName": "Singh",
+      "address": "sadkjshd",
+      "city": "Delhi",
+      "state": "Delhi",
+      "pin": "248000",
+      "phoneNumber": "7668697562",
+      "email": "am@gmail.com"
+    },
+    {
+      "bookName": "Relatives",
+      "firstName": "Rishu",
+      "lastName": "Chaudhary",
+      "address": "sadasjdhh",
+      "city": "Shimla",
+      "state": "Himachal",
+      "pin": "215441",
+      "phoneNumber": "7525225542",
+      "email": "rc@gmail.com"
+    }
+  ]
+}

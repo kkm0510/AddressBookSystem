@@ -4,24 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43f655bd-1e2b-488e-84a4-6b3612d61d0f" name="Changes" comment="ADDED : code for json file io">
+    <list default="true" id="43f655bd-1e2b-488e-84a4-6b3612d61d0f" name="Changes" comment="REFACTORED : invalid contact class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/ABDataOut.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/ABDataOut.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/invalid/ABInvalidData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/invalid/ABInvalidData.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/ABDataOut.json" beforeDir="false" afterPath="$PROJECT_DIR$/output/ABDataOut.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/ABFileOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/ABFileOperations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/CSVOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/CSVOperations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/JSONOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/fileio/JSONOperations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/models/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/models/Contact.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/models/InvalidContact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/models/InvalidContact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/addressbook/service/AddressBookDictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/addressbook/service/AddressBookDictionary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/input/ABDataIn.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/input/ABDataIn.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/input/ABDataIn.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/input/ABDataIn.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/enums/WhereToPrintEnum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/ABFileOperations.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/ABFileOperations.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/CSVOperations.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/CSVOperations.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/fileio/JSONOperations.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/models/Contact.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/models/Contact.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/models/InvalidContact.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/models/InvalidContact.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/service/AddressBook$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/service/AddressBook$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/addressbook/service/AddressBook.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/addressbook/service/AddressBook.class" afterDir="false" />
     </list>
@@ -292,7 +296,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679778352052</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="REFACTORED : invalid contact class">
+      <created>1679847087650</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1679847087651</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -331,6 +342,7 @@
     <MESSAGE value="REFACTORED : code to read and write all data in csv" />
     <MESSAGE value="ADDED : code to store invalid contacts" />
     <MESSAGE value="REFACTORED : invalid contact" />
-    <option name="LAST_COMMIT_MESSAGE" value="REFACTORED : invalid contact" />
+    <MESSAGE value="REFACTORED : invalid contact class" />
+    <option name="LAST_COMMIT_MESSAGE" value="REFACTORED : invalid contact class" />
   </component>
 </project>

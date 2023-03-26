@@ -34,8 +34,7 @@ public class CSVOperations implements ABFileOperations {
         return INVALID_DATA_LIST;
     }
 
-    @Override
-    public List<Contact> getListOfData() {
+    private List<Contact> getListOfData() {
         try (Reader reader = Files.newBufferedReader(Paths.get(INPUT_PATH))) {
             CsvToBeanBuilder<Contact> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
             csvToBeanBuilder.withType(Contact.class);
@@ -46,7 +45,7 @@ public class CSVOperations implements ABFileOperations {
             for (Contact c : list) {
                 if (c.getBookName().equals("Book Name")) continue;
                 if (!isValidContact(c)) {
-                    System.out.println("\nSkipped -> Invalid contact: \n" + c);
+                    System.out.println("\nSkipped -> invalid contact: \n" + c);
                     InvalidContact invalidContact = new InvalidContact(c, "is invalid: failed in regex check");
                     INVALID_DATA_LIST.add(invalidContact);
                     continue;
@@ -65,6 +64,7 @@ public class CSVOperations implements ABFileOperations {
         List<Contact> listOfContact;
         try {
             listOfContact = getListOfData();
+            if(listOfContact==null) throw new NullPointerException("list Of contacts is null");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
@@ -76,7 +76,7 @@ public class CSVOperations implements ABFileOperations {
                 if (!dictionary.get(c.getBookName()).contains(c))
                     dictionary.get(c.getBookName()).add(c);
                 else {
-                    System.out.println("\nSkipped -> Contact with name " + c.getFirstName() + " " + c.getLastName() +
+                    System.out.println("\nSkipped -> contact with name " + c.getFirstName() + " " + c.getLastName() +
                             " already exists in this book!!!\n" + c);
                     InvalidContact invalidContact = new InvalidContact(c, "is duplicate: contact with same name already exists in book");
                     INVALID_DATA_LIST.add(invalidContact);

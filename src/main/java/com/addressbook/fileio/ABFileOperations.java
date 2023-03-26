@@ -9,7 +9,6 @@ import java.util.Map;
 
 public interface ABFileOperations {
 
-    List<Contact> getListOfData();
 
     Map<String, List<Contact>> readDictionary();
 

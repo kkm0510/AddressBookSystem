@@ -226,7 +226,7 @@ public class AddressBookDictionary {
         while (true) {
             try {
                 System.out.print("\nEnter choice -> \n(1)Read CSV file (2)Read JSON file " +
-                        "(3)Write to CSV file (4) Write to JSON file (0)Go back to main menu : ");
+                        "(3)Write to CSV file (4)Write to JSON file (0)Go back to main menu : ");
                 int choice = sc.nextInt();
                 sc.nextLine();
                 switch (choice) {

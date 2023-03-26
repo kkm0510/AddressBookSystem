@@ -37,47 +37,35 @@ public class JSONOperations implements ABFileOperations {
     }
 
     @Override
-    public List<Contact> getListOfData() {
+    public Map<String, List<Contact>> readDictionary() {
         try (Reader reader = Files.newBufferedReader(Paths.get(INPUT_PATH))) {
             Gson gson = new Gson();
-            List<Contact> list = gson.fromJson(reader, new TypeToken<List<Contact>>() {
+            Map<String, List<Contact>> dictionary = gson.fromJson(reader, new TypeToken<Map<String, List<Contact>>>() {
             }.getType());
-            List<Contact> checkedList = new LinkedList<>();
-            for (Contact c : list) {
-                if (!isValidContact(c)) {
-                    System.out.println("\nSkipped -> Invalid contact: \n" + c);
-                    InvalidContact invalidContact = new InvalidContact(c, "is invalid: failed in regex check");
-                    INVALID_DATA_LIST.add(invalidContact);
-                    continue;
-                }
-                checkedList.add(c);
-            }
-            return checkedList;
+            return filterInvalidData(dictionary);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    @Override
-    public Map<String, List<Contact>> readDictionary() {
-        List<Contact> listOfContact = getListOfData();
+    private Map<String, List<Contact>> filterInvalidData(Map<String, List<Contact>> map) {
         Map<String, List<Contact>> dictionary = new HashMap<>();
-        for (Contact c : listOfContact) {
-            if (dictionary.containsKey(c.getBookName())) {
-                if (!dictionary.get(c.getBookName()).contains(c))
-                    dictionary.get(c.getBookName()).add(c);
-                else {
-                    System.out.println("\nSkipped -> Contact with name " + c.getFirstName() + " " + c.getLastName() +
-                            " already exists in this book!!!\n" + c);
-                    InvalidContact invalidContact = new InvalidContact(c, "is duplicate: contact with same name already exists in book");
+        for (Map.Entry<String, List<Contact>> entry : map.entrySet()) {
+            List<Contact> list = new LinkedList<>();
+            entry.getValue().forEach(contact -> {
+                if (!isValidContact(contact)) {
+                    System.out.println("\nSkipped -> invalid contact!!! \n" + contact);
+                    InvalidContact invalidContact = new InvalidContact(contact, "is invalid: failed in regex check");
                     INVALID_DATA_LIST.add(invalidContact);
-                }
-            } else {
-                List<Contact> list = new ArrayList<>();
-                list.add(c);
-                dictionary.put(c.getBookName(), list);
-            }
+                } else if (list.contains(contact)) {
+                    System.out.println("\nSkipped -> contact with name " + contact.getFirstName() + " " + contact.getLastName() +
+                            " already exists in this book!!!\n" + contact);
+                    InvalidContact invalidContact = new InvalidContact(contact, "is duplicate: contact with same name already exists in book");
+                    INVALID_DATA_LIST.add(invalidContact);
+                } else list.add(contact);
+            });
+            if(!list.isEmpty()) dictionary.put(entry.getKey(), list);
         }
         return dictionary;
     }
@@ -110,9 +98,14 @@ public class JSONOperations implements ABFileOperations {
 
     @Override
     public void writeDictionary(Map<String, List<Contact>> map) {
-        List<Contact> list = new LinkedList<>();
-        map.forEach((key, value) -> list.addAll(value));
-        writeListOfContact(list);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter writer = new FileWriter(OUTPUT_PATH)) {
+            Type mapType = new TypeToken<Map<String, List<Contact>>>() {
+            }.getType();
+            gson.toJson(map, mapType, writer);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
